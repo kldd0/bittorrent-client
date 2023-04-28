@@ -16,4 +16,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO ${CMAKE_CURRENT_SOURCE_DIR}/bi
 add_subdirectory(utils)
 add_subdirectory(tests)
 
-add_executable(bittorrent_client main.cpp utils/bencode/include/bencode/bencode.hpp utils/bencode/bencode.cpp)
+add_executable(
+  bittorrent_client 
+  main.cpp 
+  utils/bencode_parser/include/bencode_parser/bencode_parser.hpp utils/bencode_parser/bencode_parser.cpp
+)

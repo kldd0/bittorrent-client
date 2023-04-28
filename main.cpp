@@ -1,14 +1,14 @@
 #include <iostream>
 #include <string>
 
-#include "utils/bencode/include/bencode/bencode.hpp"
+#include "utils/bencode_parser/include/bencode_parser/bencode_parser.hpp"
 
 int main(int argc, char **argv) {
-  if (argc < 1) {
-    std::cout << "You didn't specify the path to the file";
+  if (argc < 2) {
+    std::cout << "You didn't specify the path to the file" << "\n";
     return 0;
   }
   std::string filename(argv[1]);
-  auto test = Bencode(filename);
+  auto test = BencodeParser(filename);
   return 0;
 }
