@@ -2,29 +2,22 @@
 
 ### Project tree
 ```tree
-bencode/
+bittorrent-client/
+├── tests/
+│   └── *
+├── torrents/
+│   └── *
+├── utils/
+│   ├── CMakeLists.txt
+│   └── bencode/
+│       ├── include/
+│       │   └── *
+│       ├── src/
+│       │   └── *
+│       └── CMakeLists.txt
+├── main.cpp
 ├── CMakeLists.txt
-└── include/
-    ├── bencode/
-    │   ├── items/
-    │   │   ├── Item.hpp
-    │   │   ├── List.hpp
-    │   │   ├── Dict.hpp
-    │   │
-    │   ├── figures/
-    │   │   ├── models/
-    │   │   │   ├── figure.hpp
-    │   │   │   ├── point.hpp
-    │   │   │   ├── polygon.hpp
-    │   │   │   └── polyline.hpp
-    │   │   ├── point.hpp
-    │   │   ├── polygon.hpp
-    │   │   └── polyline.hpp
-    │   └── space/
-    │       ├── coordinates.hpp
-    │       ├── space.hpp
-    │       └── transform.hpp
-    └── bencode.hpp
+└── README.md
 ```
 
 ### Ubuntu file
