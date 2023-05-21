@@ -1,6 +1,7 @@
 cmake-build-debug
 .idea
 build
-.clang-format
 bin
 docs
+bin.dbg
+.clang-format

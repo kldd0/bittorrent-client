@@ -1,5 +1,32 @@
 # **General info and auxiliary notes about Torrent protocol and how it works**
 
+### Project tree
+```tree
+bencode/
+├── CMakeLists.txt
+└── include/
+    ├── bencode/
+    │   ├── items/
+    │   │   ├── Item.hpp
+    │   │   ├── List.hpp
+    │   │   ├── Dict.hpp
+    │   │
+    │   ├── figures/
+    │   │   ├── models/
+    │   │   │   ├── figure.hpp
+    │   │   │   ├── point.hpp
+    │   │   │   ├── polygon.hpp
+    │   │   │   └── polyline.hpp
+    │   │   ├── point.hpp
+    │   │   ├── polygon.hpp
+    │   │   └── polyline.hpp
+    │   └── space/
+    │       ├── coordinates.hpp
+    │       ├── space.hpp
+    │       └── transform.hpp
+    └── bencode.hpp
+```
+
 ### Ubuntu file
 ```
 d
@@ -80,6 +107,90 @@ d
 ee
 ```
 
+### Atomic Heart
+```
+d
+  8:announce
+    42:udp://tracker.opentrackr.org:1337/announce
+  13:announce-list
+    l
+      l
+        42:udp://tracker.opentrackr.org:1337/announce
+      e
+      l
+        41:udp://opentracker.i2p.rocks:6969/announce
+      e
+      l
+        42:https://opentracker.i2p.rocks:443/announce
+      e
+      l
+        46:udp://tracker.openbittorrent.com:6969/announce
+      e
+      l
+        45:http://tracker.openbittorrent.com:80/announce
+      e
+      l
+        31:udp://9.rarbg.com:2810/announce
+      e
+      l
+        36:udp://open.demonii.com:1337/announce
+      e
+      l
+        37:udp://exodus.desync.com:6969/announce
+      e
+      l
+        33:udp://open.stealth.si:80/announce
+      e
+      l
+        41:udp://tracker.torrent.eu.org:451/announce
+      e
+      l
+        32:udp://retracker.megaseed.kz:6969
+      e
+    e
+  10:created by
+  31:★★★ megaseed.kz ★★★
+  13:creation date
+    i1682391412e
+  4:info
+    d
+      5:files
+      l
+        d
+          6:length
+            i74553512e
+          4:path
+          l
+            9:setup.exe
+          e
+        e
+        d
+          6:length
+            i30399772226e
+          4:path
+          l
+            4:data
+            8:data.bin
+          e
+        e
+        d
+          6:length
+            i3087738e
+          4:path
+          l
+            4:data
+            9:setup.exe
+          e
+        e
+      e
+      4:name
+        22:Atomic Heart by Igruha
+      12:piece length
+        i33554432e
+      6:pieces
+        18180:z?H???d?n??#??̀?????P4?y??(????????px?v?("
+```
+
 
 
 ### Example
@@ -90,10 +201,17 @@ ee
     (#"creation date" . 1105009474)
     (#"info"
      dictionary
+     --- when multiple files are being shared
+     (#"files [a list of dictionaries]")
+      [
+        (#"length" length—size of the file in bytes.
+        (#"path" path—a list of strings corresponding to subdirectory names, the last of which is the actual file name
+      ]
+     --- when one file is being shared 
      (#"length"       . 600158208)
      (#"name"         . #"debian-30r4-i386-binary-1.iso")
      (#"piece length" . 524288)
-     (#"pieces"       . [...large byte string...]))))
+     (#"pieces"       . [...large byte string...] [it's a hash list]))))
 
 d['announce-list'] = [ [tracker1], [backup1], [backup2] ]
 d['announce-list'] = [[ tracker1, tracker2, tracker3 ]]

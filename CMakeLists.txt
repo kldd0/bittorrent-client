@@ -17,7 +17,8 @@ add_subdirectory(utils)
 add_subdirectory(tests)
 
 add_executable(
-  bittorrent_client 
-  main.cpp 
-  utils/bencode_parser/include/bencode_parser/bencode_parser.hpp utils/bencode_parser/bencode_parser.cpp
+    bittorrent_client
+    utils
+    main.cpp
+    utils/bencode/src/bencode_parser.cpp utils/bencode/src/bencode_parser.cpp
 )

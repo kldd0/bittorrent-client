@@ -7,15 +7,15 @@
 
 class BencodeParser
 {
-  public:
-    explicit BencodeParser(std::string& filename);
+public:
+  explicit BencodeParser(std::string& filename);
 
-  private:
-    void readFile();
+private:
+  void parseFile();
 
-  private:
-    // std::unique_ptr<BencodeObject>
-    std::string m_filename {};
+private:
+  std::string m_filename {};
+  // std::unique_ptr<BencodeObject>
 };
 
 #endif //BITTORRENT_CLIENT_BENCODE_PARSER_HPP
