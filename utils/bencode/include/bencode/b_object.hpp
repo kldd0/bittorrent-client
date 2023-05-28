@@ -3,15 +3,16 @@
 
 #include <map>
 #include <string>
+#include <memory>
 
-class BItem {};
+#include "b_value.hpp"
 
 class BencodeObject
 {
   public:
 
   private:
-    std::map<std::string, *BItem> m_dictionary;
+    std::map<std::string, std::unique_ptr<BValue>> m_dict;
 };
 
-#endif // BITTORRENT_CLIENT_BENCODE_OBJECT_HPP 
+#endif

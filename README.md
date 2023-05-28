@@ -69,10 +69,10 @@ d
         i4081973248e
       4:name
         39:manjaro-gnome-22.1.0-230421-linux61.iso
-        12:piece length
-          i2097152e
-        6:pieces
-          38940:(byte string)??){
+      12:piece length
+        i2097152e
+      6:pieces
+        38940:(byte string)??){
 ee
 ```
 

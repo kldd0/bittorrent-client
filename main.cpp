@@ -2,7 +2,7 @@
 #include <string>
 #include <fstream>
 
-#include "utils/bencode/include/bencode_parser.hpp"
+#include <bencode/b_parser.hpp>
 
 int main(int argc, char **argv) {
   if (argc < 2) {
@@ -14,5 +14,7 @@ int main(int argc, char **argv) {
   std::ifstream input(filename, std::ios::binary);
 
   auto test = BencodeParser(filename);
+  test.ParseFile();
+
   return 0;
 }

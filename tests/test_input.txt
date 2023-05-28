@@ -1,0 +1,66 @@
+d
+  8:announce
+    33:udp://tracker.opentrackr.org:1337
+  10:created by
+    13:mktorrent 1.1
+  13:creation date
+    i1682071490e
+  4:info
+    d
+      6:length
+        i4081973248e
+      4:name
+        39:manjaro-gnome-22.1.0-230421-linux61.iso
+      12:piece length
+        i2097152e
+      6:pieces
+        38940:"byte string"
+    e
+e
+
+# inline
+d8:announce33:udp://tracker.opentrackr.org:133710:created by13:mktorrent 1.113:creation datei1682071490e4:infod6:lengthi4081973248e4:name39:manjaro-gnome-22.1.0-230421-linux61.iso12:piece lengthi2097152e6:pieces38940:byte_stringee
+
+
+0 d
+72 l
+73 l
+119 e
+120 l
+165 e
+166 l
+212 e
+213 l
+263 e
+264 l
+313 e
+314 l
+349 e
+350 l
+390 e
+391 l
+432 e
+433 l
+470 e
+471 l
+516 e
+517 l
+553 e
+554 e
+636 d
+644 l
+645 d
+670 l
+682 e
+683 e
+684 d
+712 l
+729 e
+730 e
+731 d
+755 l
+773 e
+774 e
+775 e
+843 e
+844 e
