@@ -11,10 +11,10 @@
 class BString : public BValue
 {
 public:
-  explicit BString(const std::string& str);
+  explicit BString(std::string str);
 
-  const std::string& GetType() const override { return m_type; }
-  const std::string& GetValue() const { return m_value; }
+  [[nodiscard]] const std::string& get_type() const override { return m_type; }
+  [[nodiscard]] const std::string& get_value() const { return m_value; }
 
 private:
   std::string m_type {"string"};

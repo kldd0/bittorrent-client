@@ -11,9 +11,9 @@
 #include "../include/bencode/b_parser.hpp"
 
 [[maybe_unused]]
-std::string ParseString(const std::vector<unsigned char>& buffer, int& i)
+std::string parse_string(const std::vector<unsigned char>& buffer, int& i)
 {
-  long long strlen = 0;
+  int strlen = 0;
   while (buffer[i] != ':') {
     strlen = strlen * 10 + (buffer[i] - '0');
     ++i;
@@ -26,9 +26,9 @@ std::string ParseString(const std::vector<unsigned char>& buffer, int& i)
 }
 
 [[maybe_unused]]
-long long ParseInteger(const std::vector<unsigned char>& buffer, int& i)
+long long parse_integer(const std::vector<unsigned char>& buffer, int& i)
 {
-  // begining with buffer[i] = 'i'
+  // beginning with buffer[i] = 'i'
   ++i;
   long long num = 0;
   while (buffer[i] != 'e') {
@@ -40,7 +40,7 @@ long long ParseInteger(const std::vector<unsigned char>& buffer, int& i)
   return num;
 }
 
-std::vector<std::pair<int, unsigned char>> ParseStream(const std::vector<unsigned char>& buffer)
+std::vector<std::pair<int, unsigned char>> parse_stream(const std::vector<unsigned char>& buffer)
 {
   std::vector<std::pair<int, unsigned char>> pairs;
   int i = 0;
@@ -48,23 +48,23 @@ std::vector<std::pair<int, unsigned char>> ParseStream(const std::vector<unsigne
   while(i < buffer.size()) {
     if (std::isdigit(buffer[i])) {
       // discarding returned value (parsing)
-      std::cout << ParseString(buffer, i) << "\n";
+      std::cout << parse_string(buffer, i) << "\n";
       continue;
     }
     if (buffer[i] == 'i') {
       // discarding returned value (parsing)
-      std::cout << ParseInteger(buffer, i) << "\n";
+      std::cout << parse_integer(buffer, i) << "\n";
       continue;
     }
     if (buffer[i] == 'd' || buffer[i] == 'l' || buffer[i] == 'e') {
-      pairs.push_back(std::make_pair(i, buffer[i]));
+      pairs.emplace_back(i, buffer[i]);
       ++i;
     } 
   }
   return pairs;
 }
 
-int BencodeParser::getIndexOfClosingPair(std::pair<int, unsigned char> p)
+int BencodeParser::get_index_of_closing_pair(std::pair<int, unsigned char> p)
 {
   // algo:
   // putting an element for which we need to find a closing pair
@@ -92,30 +92,30 @@ int BencodeParser::getIndexOfClosingPair(std::pair<int, unsigned char> p)
 
 void BencodeParser::parse(std::unique_ptr<BValue>& b_object, const std::vector<unsigned char>& buffer, int& index, int& end)
 {
-  if (b_object->GetType() == "dict") {
+  if (b_object->get_type() == "dict") {
     while (index != end) {
       std::cout << buffer[index] << "\n";
-      std::string key = ParseString(buffer, index);
+      std::string key = parse_string(buffer, index);
       std::cout << "key = " << key << "\n";
       if (std::isdigit(buffer[index])) {
-        std::unique_ptr<BValue> value = std::make_unique<BString>(ParseString(buffer, index));
+        std::unique_ptr<BValue> value = std::make_unique<BString>(parse_string(buffer, index));
         // adding item in dict
         // auto s_val = dynamic_cast<BString>(value);
-        // std::cout << "value = " << s_val->GetValue() << "\n";
-        b_object->AddItem(key, value);
-        std::cout << "added successfuly" << "\n";
+        // std::cout << "value = " << s_val->get_value() << "\n";
+        b_object->add_item(key, value);
+        std::cout << "added successfully" << "\n";
       }
       if (buffer[index] == 'i') {
-        std::unique_ptr<BValue> value = std::make_unique<BInteger>(ParseInteger(buffer, index));
+        std::unique_ptr<BValue> value = std::make_unique<BInteger>(parse_integer(buffer, index));
         // adding item in dict
-        b_object->AddItem(key, std::make_unique<BString>(ParseString(buffer, index)));
-        std::cout << "added successfuly" << "\n";
+        b_object->add_item(key, value);
+        std::cout << "added successfully" << "\n";
       }
       if (buffer[index] == 'd') {
         std::cout << "creating dict" << "\n";
         std::unique_ptr<BValue> value = std::make_unique<BDict>();
         // getting index of ending symbol for this dictionary
-        int end_index = getIndexOfClosingPair(std::make_pair(index, buffer[index]));
+        int end_index = get_index_of_closing_pair(std::make_pair(index, buffer[index]));
         std::cout << "end = " << buffer[end_index] << " " << end_index << "\n";
         // as buffer[index] == 'd' => 
         // index needs to be incremented
@@ -124,15 +124,15 @@ void BencodeParser::parse(std::unique_ptr<BValue>& b_object, const std::vector<u
         std::cout << "recursive parse starts: " << "starting i: " << index << " ending i: " << end_index << "\n";
         parse(value, buffer, index, end_index);
         // adding item in dict
-        b_object->AddItem(key, value);
+        b_object->add_item(key, value);
         // buffer[index] == 'e' => incrementing
-        std::cout << "added successfuly" << "\n";
+        std::cout << "added successfully" << "\n";
         ++index;
       }
       if (buffer[index] == 'l') {
         std::unique_ptr<BValue> value = std::make_unique<BList>();
         // getting index of ending symbol for this list
-        int end_index = getIndexOfClosingPair(std::make_pair(index, buffer[index]));
+        int end_index = get_index_of_closing_pair(std::make_pair(index, buffer[index]));
         std::cout << "end = " << buffer[end_index] << " " << end_index << "\n";
         // as buffer[index] == 'l' => 
         // index needs to be incremented
@@ -141,30 +141,30 @@ void BencodeParser::parse(std::unique_ptr<BValue>& b_object, const std::vector<u
         std::cout << "recursive parse starts: " << "starting i: " << index << " ending i: " << end_index << "\n";
         parse(value, buffer, index, end_index);
         // adding item in dict
-        b_object->AddItem(key, value);
+        b_object->add_item(key, value);
         // buffer[index] == 'e' => incrementing
-        std::cout << "added successfuly" << "\n";
+        std::cout << "added successfully" << "\n";
         ++index;
       }
     }
-  } else if (b_object->GetType() == "list") {
+  } else if (b_object->get_type() == "list") {
     while (index != end) {
       if (std::isdigit(buffer[index])) {
-        std::unique_ptr<BValue> value = std::make_unique<BString>(ParseString(buffer, index));
+        std::unique_ptr<BValue> value = std::make_unique<BString>(parse_string(buffer, index));
         // adding item in list
-        b_object->AddItem(value);
-        std::cout << "added successfuly" << "\n";
+        b_object->add_item(value);
+        std::cout << "added successfully" << "\n";
       }
       if (buffer[index] == 'i') {
-        std::unique_ptr<BValue> value = std::make_unique<BInteger>(ParseInteger(buffer, index));
+        std::unique_ptr<BValue> value = std::make_unique<BInteger>(parse_integer(buffer, index));
         // adding item in list
-        b_object->AddItem(value);
-        std::cout << "added successfuly" << "\n";
+        b_object->add_item(value);
+        std::cout << "added successfully" << "\n";
       }
       if (buffer[index] == 'd') {
         std::unique_ptr<BValue> value = std::make_unique<BDict>();
         // getting index of ending symbol for this dictionary
-        int end_index = getIndexOfClosingPair(std::make_pair(index, buffer[index]));
+        int end_index = get_index_of_closing_pair(std::make_pair(index, buffer[index]));
         std::cout << "end = " << buffer[end_index] << " " << end_index << "\n";
         // as buffer[index] == 'd' => 
         // index needs to be incremented
@@ -173,15 +173,15 @@ void BencodeParser::parse(std::unique_ptr<BValue>& b_object, const std::vector<u
         std::cout << "recursive parse starts: " << "starting i: " << index << " ending i: " << end_index << "\n";
         parse(value, buffer, index, end_index);
         // adding item in list
-        b_object->AddItem(value);
+        b_object->add_item(value);
         // buffer[index] == 'e' => incrementing
-        std::cout << "added successfuly" << "\n";
+        std::cout << "added successfully" << "\n";
         ++index;
       }
       if (buffer[index] == 'l') {
         std::unique_ptr<BValue> value = std::make_unique<BList>();
         // getting index of ending symbol for this list
-        int end_index = getIndexOfClosingPair(std::make_pair(index, buffer[index]));
+        int end_index = get_index_of_closing_pair(std::make_pair(index, buffer[index]));
         std::cout << "end = " << buffer[end_index] << " " << end_index << "\n";
         // as buffer[index] == 'l' => 
         // index needs to be incremented
@@ -190,9 +190,9 @@ void BencodeParser::parse(std::unique_ptr<BValue>& b_object, const std::vector<u
         std::cout << "recursive parse starts: " << "starting i: " << index << " ending i: " << end_index << "\n";
         parse(value, buffer, index, end_index);
         // adding item in dict
-        b_object->AddItem(value);
+        b_object->add_item(value);
         // buffer[index] == 'e' => incrementing
-        std::cout << "added successfuly" << "\n";
+        std::cout << "added successfully" << "\n";
         ++index;
       }
     }
@@ -203,52 +203,11 @@ BencodeParser::BencodeParser(std::string &filename)
   : m_filename(filename)
 {};
 
-void PrintDict(BDict* torrent_ptr, std::string s);
+void print_dict(BDict* torrent_ptr, std::string s);
 
-void PrintList(BList* t_list) {
-  std::cout << "[";
-  for (auto const& v : t_list->GetValue()) {
-    if (v->GetType() == "string") {
-      std::cout << static_cast<BString*>(v.get())->GetValue() << " "; 
-    }
-    if (v->GetType() == "int") {
-      std::cout << static_cast<BInteger*>(v.get())->GetValue() << " "; 
-    }
-    if (v->GetType() == "list") {
-      std::cout << "value list: ";
-      PrintList(static_cast<BList*>(v.get()));
-    }
-    if (v->GetType() == "dict") {
-      std::cout << "value dict:\n";
-      PrintDict(static_cast<BDict*>(v.get()), "\t\t");
-    }
-    std::cout << "]\n";
-  }
-}
+void print_list(BList* t_list);
 
-void PrintDict(BDict* torrent_ptr, std::string s) {
-  std::cout << s << "{\n";
-  for (auto const& [k, v] : torrent_ptr->GetValue()) {
-    std::cout << s << "key = " << k << " ";
-    if (v->GetType() == "string") {
-      std::cout << s << "value = " << static_cast<BString*>(v.get())->GetValue() << "\n"; 
-    }
-    if (v->GetType() == "int") {
-      std::cout << s << "value = " << static_cast<BInteger*>(v.get())->GetValue() << "\n"; 
-    }
-    if (v->GetType() == "list") {
-      std::cout << s << "values list: ";
-      PrintList(static_cast<BList*>(v.get()));
-    }
-    if (v->GetType() == "dict") {
-      std::cout << "value dict:\n";
-      PrintDict(static_cast<BDict*>(v.get()), "\t\t");
-    }
-  }
-  std::cout << "}" << s << "\n";
-}
-
-void BencodeParser::ParseFile()
+void BencodeParser::parse_file()
 {
   std::ifstream input(m_filename, std::ios::binary);
   std::stringstream sstr;
@@ -264,7 +223,7 @@ void BencodeParser::ParseFile()
   std::cout << "last elem = " << *(buffer.end() - 1) << "\n";
 
   // destructuring in pairs of starting and ending symbols
-  m_pairs = ParseStream(buffer);
+  m_pairs = parse_stream(buffer);
 
   std::cout << "----------------------- PAIRS -----------------------" << "\n";
   for (auto elem : m_pairs) {
@@ -282,7 +241,54 @@ void BencodeParser::ParseFile()
   std::cout << "starting indexes = " << start << " " << end << "\n";
   parse(torrent_object, buffer, start, end);
 
-  BDict* torrent_ptr = static_cast<BDict*>(torrent_object.get());
+  BDict* torrent_ptr = dynamic_cast<BDict*>(torrent_object.get());
   std::cout << "-----------------------------------------" << "\n";
-  PrintDict(torrent_ptr, "");
+  print_dict(torrent_ptr, "");
 }
+
+/*
+ * @brief [debug helper funcs] functions for pretty print
+ */
+void print_list(BList* t_list) {
+  std::cout << "[";
+  for (auto const& v : t_list->get_value()) {
+    if (v->get_type() == "string") {
+      std::cout << dynamic_cast<BString*>(v.get())->get_value() << " "; 
+    }
+    if (v->get_type() == "int") {
+      std::cout << dynamic_cast<BInteger*>(v.get())->get_value() << " "; 
+    }
+    if (v->get_type() == "list") {
+      std::cout << "value list: ";
+      print_list(dynamic_cast<BList*>(v.get()));
+    }
+    if (v->get_type() == "dict") {
+      std::cout << "value dict:\n";
+      print_dict(dynamic_cast<BDict*>(v.get()), "\t\t");
+    }
+    std::cout << "]\n";
+  }
+}
+
+void print_dict(BDict* torrent_ptr, std::string s) {
+  std::cout << s << "{\n";
+  for (auto const& [k, v] : torrent_ptr->get_value()) {
+    std::cout << s << "key = " << k << " ";
+    if (v->get_type() == "string") {
+      std::cout << s << "value = " << dynamic_cast<BString*>(v.get())->get_value() << "\n"; 
+    }
+    if (v->get_type() == "int") {
+      std::cout << s << "value = " << dynamic_cast<BInteger*>(v.get())->get_value() << "\n"; 
+    }
+    if (v->get_type() == "list") {
+      std::cout << s << "values list: ";
+      print_list(dynamic_cast<BList*>(v.get()));
+    }
+    if (v->get_type() == "dict") {
+      std::cout << "value dict:\n";
+      print_dict(dynamic_cast<BDict*>(v.get()), "\t\t");
+    }
+  }
+  std::cout << "}" << s << "\n";
+}
+

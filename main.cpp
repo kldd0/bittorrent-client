@@ -14,7 +14,7 @@ int main(int argc, char **argv) {
   std::ifstream input(filename, std::ios::binary);
 
   auto test = BencodeParser(filename);
-  test.ParseFile();
+  test.parse_file();
 
   return 0;
 }

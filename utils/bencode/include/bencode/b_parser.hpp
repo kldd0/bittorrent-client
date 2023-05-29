@@ -14,11 +14,11 @@ class BencodeParser
 public:
   explicit BencodeParser(std::string& filename);
   
-  void ParseFile();
+  void parse_file();
 
 private:
 
-  int getIndexOfClosingPair(std::pair<int, unsigned char> p);
+  int get_index_of_closing_pair(std::pair<int, unsigned char> p);
   void parse(std::unique_ptr<BValue>& b_object, const std::vector<unsigned char>& buffer, int& index, int& end);
 
 private:

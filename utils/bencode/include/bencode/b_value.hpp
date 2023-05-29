@@ -10,12 +10,12 @@
 class BValue
 {
 public:
-  virtual ~BValue() {};
+  virtual ~BValue() = default;
 
-  virtual const std::string& GetType() const = 0;
-  virtual void AddItem(std::unique_ptr<BValue>& value) {};
-  virtual void AddItem(std::string key, std::unique_ptr<BValue> value) {};
-  virtual void AddItem(std::string key, std::unique_ptr<BValue>& value) {};
+  [[nodiscard]] virtual const std::string& get_type() const = 0;
+  virtual void add_item(std::unique_ptr<BValue>& value) {};
+  virtual void add_item(const std::string& key, std::unique_ptr<BValue>& value) {};
+  // virtual void add_item(std::string key, std::unique_ptr<BValue> value) {};
 };
 
 #endif

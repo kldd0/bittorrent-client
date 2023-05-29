@@ -12,8 +12,8 @@ class BInteger : public BValue
 public:
   explicit BInteger(long long num);
 
-  const std::string& GetType() const override { return m_type; }
-  long long GetValue() const { return m_value; }
+  [[nodiscard]] const std::string& get_type() const override { return m_type; }
+  [[nodiscard]] long long get_value() const { return m_value; }
 
 private:
   std::string m_type {"int"};
