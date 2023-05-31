@@ -94,56 +94,45 @@ void BencodeParser::parse(std::unique_ptr<BValue>& b_object, const std::vector<u
 {
   if (b_object->get_type() == "dict") {
     while (index != end) {
-      std::cout << buffer[index] << "\n";
       std::string key = parse_string(buffer, index);
-      std::cout << "key = " << key << "\n";
       if (std::isdigit(buffer[index])) {
         std::unique_ptr<BValue> value = std::make_unique<BString>(parse_string(buffer, index));
         // adding item in dict
         // auto s_val = dynamic_cast<BString>(value);
         // std::cout << "value = " << s_val->get_value() << "\n";
         b_object->add_item(key, value);
-        std::cout << "added successfully" << "\n";
       }
       if (buffer[index] == 'i') {
         std::unique_ptr<BValue> value = std::make_unique<BInteger>(parse_integer(buffer, index));
         // adding item in dict
         b_object->add_item(key, value);
-        std::cout << "added successfully" << "\n";
       }
       if (buffer[index] == 'd') {
-        std::cout << "creating dict" << "\n";
-        std::unique_ptr<BValue> value = std::make_unique<BDict>();
         // getting index of ending symbol for this dictionary
         int end_index = get_index_of_closing_pair(std::make_pair(index, buffer[index]));
-        std::cout << "end = " << buffer[end_index] << " " << end_index << "\n";
+        std::unique_ptr<BValue> value = std::make_unique<BDict>(index, end_index);
         // as buffer[index] == 'd' => 
         // index needs to be incremented
         ++index;
         // recursively parsing value dict
-        std::cout << "recursive parse starts: " << "starting i: " << index << " ending i: " << end_index << "\n";
         parse(value, buffer, index, end_index);
         // adding item in dict
         b_object->add_item(key, value);
         // buffer[index] == 'e' => incrementing
-        std::cout << "added successfully" << "\n";
         ++index;
       }
       if (buffer[index] == 'l') {
-        std::unique_ptr<BValue> value = std::make_unique<BList>();
         // getting index of ending symbol for this list
         int end_index = get_index_of_closing_pair(std::make_pair(index, buffer[index]));
-        std::cout << "end = " << buffer[end_index] << " " << end_index << "\n";
+        std::unique_ptr<BValue> value = std::make_unique<BList>(index, end_index);
         // as buffer[index] == 'l' => 
         // index needs to be incremented
         ++index;
         // recursively parsing value list
-        std::cout << "recursive parse starts: " << "starting i: " << index << " ending i: " << end_index << "\n";
         parse(value, buffer, index, end_index);
         // adding item in dict
         b_object->add_item(key, value);
         // buffer[index] == 'e' => incrementing
-        std::cout << "added successfully" << "\n";
         ++index;
       }
     }
@@ -153,46 +142,38 @@ void BencodeParser::parse(std::unique_ptr<BValue>& b_object, const std::vector<u
         std::unique_ptr<BValue> value = std::make_unique<BString>(parse_string(buffer, index));
         // adding item in list
         b_object->add_item(value);
-        std::cout << "added successfully" << "\n";
       }
       if (buffer[index] == 'i') {
         std::unique_ptr<BValue> value = std::make_unique<BInteger>(parse_integer(buffer, index));
         // adding item in list
         b_object->add_item(value);
-        std::cout << "added successfully" << "\n";
       }
       if (buffer[index] == 'd') {
-        std::unique_ptr<BValue> value = std::make_unique<BDict>();
         // getting index of ending symbol for this dictionary
         int end_index = get_index_of_closing_pair(std::make_pair(index, buffer[index]));
-        std::cout << "end = " << buffer[end_index] << " " << end_index << "\n";
+        std::unique_ptr<BValue> value = std::make_unique<BDict>(index, end_index);
         // as buffer[index] == 'd' => 
         // index needs to be incremented
         ++index;
         // recursively parsing value dict
-        std::cout << "recursive parse starts: " << "starting i: " << index << " ending i: " << end_index << "\n";
         parse(value, buffer, index, end_index);
         // adding item in list
         b_object->add_item(value);
         // buffer[index] == 'e' => incrementing
-        std::cout << "added successfully" << "\n";
         ++index;
       }
       if (buffer[index] == 'l') {
-        std::unique_ptr<BValue> value = std::make_unique<BList>();
         // getting index of ending symbol for this list
         int end_index = get_index_of_closing_pair(std::make_pair(index, buffer[index]));
-        std::cout << "end = " << buffer[end_index] << " " << end_index << "\n";
+        std::unique_ptr<BValue> value = std::make_unique<BList>(index, end_index);
         // as buffer[index] == 'l' => 
         // index needs to be incremented
         ++index;
         // recursively parsing value list
-        std::cout << "recursive parse starts: " << "starting i: " << index << " ending i: " << end_index << "\n";
         parse(value, buffer, index, end_index);
         // adding item in dict
         b_object->add_item(value);
         // buffer[index] == 'e' => incrementing
-        std::cout << "added successfully" << "\n";
         ++index;
       }
     }
@@ -241,7 +222,7 @@ void BencodeParser::parse_file()
   std::cout << "starting indexes = " << start << " " << end << "\n";
   parse(torrent_object, buffer, start, end);
 
-  BDict* torrent_ptr = dynamic_cast<BDict*>(torrent_object.get());
+  auto* torrent_ptr = dynamic_cast<BDict*>(torrent_object.get());
   std::cout << "-----------------------------------------" << "\n";
   print_dict(torrent_ptr, "");
 }
