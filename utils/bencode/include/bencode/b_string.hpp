@@ -3,12 +3,12 @@
 
 #include <string>
 
-#include "b_value.hpp"
+#include "b_type.hpp"
 
-/*
+/**
  * Class representing string in bencoding
-*/
-class BString : public BValue
+ */
+class BString : public BType
 {
 public:
   explicit BString(std::string str);

@@ -2,7 +2,9 @@
 #include <string>
 #include <fstream>
 
-#include <bencode/b_parser.hpp>
+#include <boost/asio.hpp>
+
+#include <bencode/torrent_file.hpp>
 
 int main(int argc, char **argv) {
   if (argc < 2) {
@@ -13,8 +15,7 @@ int main(int argc, char **argv) {
 
   std::ifstream input(filename, std::ios::binary);
 
-  auto test = BencodeParser(filename);
-  test.parse_file();
+  auto test = TorrentFile(filename);
 
   return 0;
 }

@@ -1,13 +1,13 @@
 #ifndef BITTORRENT_CLIENT_B_INTEGER_HPP
 #define BITTORRENT_CLIENT_B_INTEGER_HPP
 
-#include "b_value.hpp"
+#include "b_type.hpp"
 
-/*
- * Class representing string in bencoding
+/**
+ * Class representing numerical type in bencoding
  * type is long long because values can be huge
-*/
-class BInteger : public BValue
+ */
+class BInteger : public BType
 {
 public:
   explicit BInteger(long long num);

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 3.7)
 
 set(SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(INC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
@@ -8,9 +8,9 @@ set(SOURCES
 	${SRC_DIR}/b_integer.cpp
 	${SRC_DIR}/b_list.cpp
 	${SRC_DIR}/b_object.cpp
-	${SRC_DIR}/b_parser.cpp
+	${SRC_DIR}/b_bytes.cpp
+	${SRC_DIR}/torrent_file.cpp
 	${SRC_DIR}/b_string.cpp
-	${SRC_DIR}/b_value.cpp
 )
 
 include_directories(${INC_DIR})

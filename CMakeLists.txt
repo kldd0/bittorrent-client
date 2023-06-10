@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 3.7)
 project(bittorrent_client)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
@@ -15,6 +15,12 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO ${CMAKE_CURRENT_SOURCE_DIR}/bi
 
 add_subdirectory(utils)
 add_subdirectory(tests)
+
+# if(Boost_FOUND)
+#     include_directories(${Boost_INCLUDE_DIRS}) 
+#     add_executable(bittorrent_client main.cpp) 
+#     target_link_libraries(bittorrent_client bencode ${Boost_LIBRARIES})
+# endif()
 
 add_executable(bittorrent_client main.cpp)
 

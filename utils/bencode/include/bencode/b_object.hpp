@@ -5,14 +5,14 @@
 #include <string>
 #include <memory>
 
-#include "b_value.hpp"
+#include "b_type.hpp"
 
 class BencodeObject
 {
   public:
 
   private:
-    std::map<std::string, std::unique_ptr<BValue>> m_dict;
+    std::map<std::string, std::unique_ptr<BType>> m_dict;
 };
 
 #endif
