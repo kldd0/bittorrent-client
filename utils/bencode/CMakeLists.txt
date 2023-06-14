@@ -9,8 +9,8 @@ set(SOURCES
 	${SRC_DIR}/b_list.cpp
 	${SRC_DIR}/b_object.cpp
 	${SRC_DIR}/b_bytes.cpp
-	${SRC_DIR}/torrent_file.cpp
 	${SRC_DIR}/b_string.cpp
+	${SRC_DIR}/torrent_file.cpp
 )
 
 include_directories(${INC_DIR})

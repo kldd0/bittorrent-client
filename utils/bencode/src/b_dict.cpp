@@ -9,8 +9,3 @@ void BDict::add_item(const std::string& key, std::shared_ptr<BType>& value)
 {
   m_dict.emplace(key, std::move(value));
 }
-
-// void BDict::add_item(std::string key, std::shared_ptr<BType> value)
-// {
-//   m_dict.emplace(key, std::move(value));
-// }

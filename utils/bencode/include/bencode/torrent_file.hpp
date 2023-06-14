@@ -3,37 +3,24 @@
 
 #include <map>
 #include <memory>
-#include <string>
 #include <vector>
-#include <utility>
 
 #include "b_types.hpp"
 
-class TorrentFile
-{
-public:
-  explicit TorrentFile(std::string& filename);
-
-  void parse_file();
-  
-private:
-  // helper function for decoding algorithm
-  int get_index_of_closing_pair (std::pair<int, unsigned char> p);
-
-  // main parsing function
-  void parse(std::shared_ptr<BType>& b_object, const std::vector<unsigned char>& buffer, int& index, int& end);
+class TorrentFile {
+ public:
+  TorrentFile(const std::string& filename);
 
   std::string get_info_hash();
+  std::string get_announce();
 
-  // function for creating empty files
+ private:
   void create_empty_files();
 
-private:
-  std::string m_filename {};
-  std::vector<unsigned char> m_buffer;
-  std::vector<std::pair<int, unsigned char>> m_pairs;
+ private:
+  std::string m_filename{};
 
-  std::shared_ptr<BDict> m_data;
+  std::shared_ptr<BencodeObject> m_data;
 };
 
 #endif
