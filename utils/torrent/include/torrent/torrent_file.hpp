@@ -5,7 +5,7 @@
 #include <memory>
 #include <vector>
 
-#include "b_types.hpp"
+#include <bencode/b_types.hpp>
 
 class TorrentFile {
  public:

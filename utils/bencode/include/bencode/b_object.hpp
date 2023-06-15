@@ -11,8 +11,10 @@ class BencodeObject {
  public:
   BencodeObject(const std::vector<unsigned char>& buffer);
 
-  [[nodiscard]] const std::shared_ptr<BDict>& get_value() { return m_dict; }
-  [[nodiscard]] const std::vector<unsigned char>& get_buffer() {
+  [[nodiscard]] const std::shared_ptr<const BDict> get_value() {
+    return m_dict;
+  }
+  [[nodiscard]] const std::vector<unsigned char>& get_buffer() const {
     return m_buffer;
   }
 

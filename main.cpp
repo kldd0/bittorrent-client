@@ -4,7 +4,7 @@
 
 #include <boost/asio.hpp>
 
-#include <bencode/torrent_file.hpp>
+#include <torrent/torrent_file.hpp>
 
 int main(int argc, char **argv) {
   if (argc < 2) {

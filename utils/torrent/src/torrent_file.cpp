@@ -1,17 +1,16 @@
 #include <algorithm>
-#include <cassert>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
-#include <iterator>
 #include <memory>
 #include <sstream>
+#include <stdexcept>
 #include <utility>
 #include <vector>
 
 #include <boost/compute/detail/sha1.hpp>
 
-#include "../include/bencode/torrent_file.hpp"
+#include "../include/torrent/torrent_file.hpp"
 
 TorrentFile::TorrentFile(const std::string& filename) : m_filename(filename) {
   std::ifstream input(m_filename, std::ios::binary);
@@ -30,7 +29,7 @@ TorrentFile::TorrentFile(const std::string& filename) : m_filename(filename) {
 
 std::string TorrentFile::get_info_hash() {
   // dict of b_object
-  const std::shared_ptr<BDict> dict = m_data->get_value();
+  auto dict = m_data->get_value();
 
   // getting info dict object
   // it's needed for creating a sha1 hash from raw bytes
@@ -67,17 +66,23 @@ void fill_file_with_zero_bytes(std::string filename, long long length,
   if (path != "") {
     fs::create_directories(path);
   }
+  // making correct path of file
   fs::path file_path = path;
   file_path /= filename;
+
   std::cout << "curr path: " << path + filename << "\n";
 
+  // open file for reading in binary mode
   std::ofstream file{file_path, std::ios::binary};
 
   // check if file is open
-  assert(file.is_open());
+  if (!file.is_open()) {
+    throw std::runtime_error("File not found: " + file_path.string());
+  }
   // moving pointer to the end of file
   file.seekp(length - 1, std::ios::beg);
 
+  // writing zero bytes to file
   char byte = 0;
   file.write(&byte, 1);
   file.close();
@@ -92,7 +97,7 @@ void TorrentFile::create_empty_files() {
     fs::current_path("download");
   }
   // dict of b_object
-  const std::shared_ptr<BDict> dict = m_data->get_value();
+  auto dict = m_data->get_value();
   // getting info dict object
   std::map<std::string, std::shared_ptr<BType>> info_dict =
       std::dynamic_pointer_cast<BDict>(dict->get_value().find("info")->second)

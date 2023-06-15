@@ -24,4 +24,4 @@ add_subdirectory(tests)
 
 add_executable(bittorrent_client main.cpp)
 
-target_link_libraries(bittorrent_client bencode)
+target_link_libraries(bittorrent_client torrent)

@@ -4,27 +4,25 @@ set(SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(INC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 set(SOURCES 
-	${SRC_DIR}/b_dict.cpp
-	${SRC_DIR}/b_integer.cpp
-	${SRC_DIR}/b_list.cpp
-	${SRC_DIR}/b_object.cpp
-	${SRC_DIR}/b_bytes.cpp
-	${SRC_DIR}/b_string.cpp
+	${SRC_DIR}/torrent_file.cpp
+	${SRC_DIR}/tracker.cpp
 )
 
 include_directories(${INC_DIR})
 
-add_library(bencode STATIC ${SOURCES})
+add_library(torrent STATIC ${SOURCES})
+
+target_link_libraries(torrent PUBLIC bencode)
 
 set(HEADER_PATH ${INC_DIR})
 
-target_include_directories(bencode PUBLIC ${HEADER_PATH})
+target_include_directories(torrent PUBLIC ${HEADER_PATH})
 
-set_target_properties(bencode PROPERTIES 
+set_target_properties(torrent PROPERTIES 
     ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib
 )
 
-install(TARGETS bencode 
+install(TARGETS torrent 
     ARCHIVE DESTINATION lib
 )
 
