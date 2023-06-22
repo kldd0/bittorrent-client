@@ -11,13 +11,15 @@ class TorrentFile {
  public:
   TorrentFile(const std::string& filename);
 
-  std::string get_info_hash();
+  std::vector<unsigned char> get_info_hash();
   std::string get_announce();
+  long long get_torrent_size() { return m_torrent_size; }
 
  private:
   void create_empty_files();
 
  private:
+  long long m_torrent_size{0};
   std::string m_filename{};
 
   std::shared_ptr<BencodeObject> m_data;

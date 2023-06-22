@@ -8,6 +8,11 @@
 #include <utility>
 #include <vector>
 
+#include <boost/algorithm/hex.hpp>
+#include <boost/algorithm/string.hpp>
+#include <boost/archive/iterators/base64_from_binary.hpp>
+#include <boost/archive/iterators/transform_width.hpp>
+
 #include <boost/compute/detail/sha1.hpp>
 
 #include "../include/torrent/torrent_file.hpp"
@@ -22,14 +27,12 @@ TorrentFile::TorrentFile(const std::string& filename) : m_filename(filename) {
 
   m_data = std::make_shared<BencodeObject>(buffer);
 
-  std::cout << get_info_hash() << "\n";
-
   create_empty_files();
 }
 
-std::string TorrentFile::get_info_hash() {
+std::vector<unsigned char> TorrentFile::get_info_hash() {
   // dict of b_object
-  auto dict = m_data->get_value();
+  auto dict = m_data->get_dict();
 
   // getting info dict object
   // it's needed for creating a sha1 hash from raw bytes
@@ -57,7 +60,12 @@ std::string TorrentFile::get_info_hash() {
   }
 
   std::string hash_str = oss.str();
-  return hash_str;
+  std::cout << "hash_string: " << hash_str << "\n";
+
+  std::vector<unsigned char> bytes;
+  boost::algorithm::unhex(hash_str, std::back_inserter(bytes));
+
+  return bytes;
 }
 
 void fill_file_with_zero_bytes(std::string filename, long long length,
@@ -97,7 +105,7 @@ void TorrentFile::create_empty_files() {
     fs::current_path("download");
   }
   // dict of b_object
-  auto dict = m_data->get_value();
+  auto dict = m_data->get_dict();
   // getting info dict object
   std::map<std::string, std::shared_ptr<BType>> info_dict =
       std::dynamic_pointer_cast<BDict>(dict->get_value().find("info")->second)
@@ -138,6 +146,8 @@ void TorrentFile::create_empty_files() {
               ->get_value();
       // creating file
       fill_file_with_zero_bytes(filename, length, dir_path);
+
+      m_torrent_size += length;
     }
   } else {
     long long length =
@@ -149,5 +159,13 @@ void TorrentFile::create_empty_files() {
             ->get_value();
     // creating file
     fill_file_with_zero_bytes(filename, length);
+
+    m_torrent_size += length;
   }
+}
+
+std::string TorrentFile::get_announce() {
+  return std::dynamic_pointer_cast<BString>(
+             m_data->get_dict()->get_value().find("announce")->second)
+      ->get_value();
 }

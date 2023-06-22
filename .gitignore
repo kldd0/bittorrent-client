@@ -5,3 +5,5 @@ bin
 docs
 bin.dbg
 .clang-format
+utils/bencode/lib
+utils/torrent/lib

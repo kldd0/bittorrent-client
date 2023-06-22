@@ -1,9 +1,12 @@
 #include <iostream>
+#include <memory>
 #include <string>
 #include <fstream>
+#include <utility>
 
 #include <boost/asio.hpp>
 
+#include <torrent/tracker.hpp>
 #include <torrent/torrent_file.hpp>
 
 int main(int argc, char **argv) {
@@ -15,7 +18,8 @@ int main(int argc, char **argv) {
 
   std::ifstream input(filename, std::ios::binary);
 
-  auto test = TorrentFile(filename);
+  auto torrent = std::make_unique<TorrentFile>(filename);
+  auto tracker = Tracker(std::move(torrent));
 
   return 0;
 }

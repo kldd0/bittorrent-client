@@ -243,13 +243,13 @@ BencodeObject::BencodeObject(const std::vector<unsigned char>& buffer)
   // destructuring in pairs of starting and ending symbols
   m_pairs = parse_stream(m_buffer);
 
-  std::cout << "---- pairs ----"
-            << "\n";
-  for (auto e : m_pairs) {
-    std::cout << "start: " << e.first << " elem: " << e.second << "\n";
-  }
-  std::cout << "---------------"
-            << "\n";
+  // std::cout << "---- pairs ----"
+  //           << "\n";
+  // for (auto e : m_pairs) {
+  //   std::cout << "start: " << e.first << " elem: " << e.second << "\n";
+  // }
+  // std::cout << "---------------"
+  //           << "\n";
 
   // +1 because main dictionary is already created
   // excluding starting symbols of container ex. 'd'

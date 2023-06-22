@@ -6,6 +6,7 @@ set(INC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 set(SOURCES 
 	${SRC_DIR}/torrent_file.cpp
 	${SRC_DIR}/tracker.cpp
+	${SRC_DIR}/peer.cpp
 )
 
 include_directories(${INC_DIR})
