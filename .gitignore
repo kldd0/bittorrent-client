@@ -6,10 +6,10 @@ bin
 docs
 bin.dbg
 .clang-format
+.clangd
 utils/bencode/lib
 utils/torrent/lib
 temp.cxx
-.clangd
 download
 Doxyfile.bak
 doxygen/
