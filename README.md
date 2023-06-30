@@ -9,7 +9,13 @@ bittorrent-client/
 │   └── *
 ├── utils/
 │   ├── CMakeLists.txt
-│   └── bencode/
+│   ├── bencode/
+│   │   ├── include/
+│   │   │   └── *
+│   │   ├── src/
+│   │   │   └── *
+│   │   └── CMakeLists.txt
+│   └── torrent/
 │       ├── include/
 │       │   └── *
 │       ├── src/
