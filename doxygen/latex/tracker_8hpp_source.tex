@@ -1,0 +1,40 @@
+\hypertarget{tracker_8hpp_source}{}\doxysection{tracker.\+hpp}
+\label{tracker_8hpp_source}\index{tracker.hpp@{tracker.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ BITTORRENT\_CLIENT\_TRACKER\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ BITTORRENT\_CLIENT\_TRACKER\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}peer.hpp"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}torrent\_file.hpp"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{using\ }boost::asio::ip::tcp;}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classTracker}{Tracker}}\ \{}
+\DoxyCodeLine{00018\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{classTracker_aadbd55c5a1ed14bf92de22706a03e6ea}{Tracker}}(std::shared\_ptr<TorrentFile>\ torrent);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00030\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classTracker_a630ac415abd642118e5cef4b950bdf1e}{request\_peers\_data}}();}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00038\ \ \ std::string\ generate\_peer\_id();}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00044\ \ \ \textcolor{keywordtype}{void}\ unpack\_peer\_bytes();}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00050\ \ \ \textcolor{keywordtype}{void}\ check\_peers();}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00053\ \ \ std::string\ m\_peer\_id;\ \textcolor{comment}{//\ peer\ id\ value}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ m\_interval;\ \textcolor{comment}{//\ timeout\ interval\ for\ sending\ requests\ to\ peer}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ std::vector<tcp::endpoint>\ m\_peers\_ep;\ \textcolor{comment}{//\ vector\ of\ peers\ endpoints}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ std::shared\_ptr<TorrentFile>\ m\_torrent\_file;\ \textcolor{comment}{//\ pointer\ to\ torrent\ file\ }}
+\DoxyCodeLine{00060\ \};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

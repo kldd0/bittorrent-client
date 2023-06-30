@@ -1,0 +1,111 @@
+\hypertarget{classBType}{}\doxysection{BType Class Reference}
+\label{classBType}\index{BType@{BType}}
+
+
+Bencoding type interface.  
+
+
+
+
+{\ttfamily \#include $<$b\+\_\+type.\+hpp$>$}
+
+Inheritance diagram for BType\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classBType}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classBType_a5bae287e59bf775bdb7e5ce726529a5b}{$\sim$\+BType}} ()=default
+\begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{classBType}{BType}} object. \end{DoxyCompactList}\item 
+virtual const std\+::string \& \mbox{\hyperlink{classBType_a0ee91da96a08a9367c0db765f256e30f}{get\+\_\+type}} () const =0
+\begin{DoxyCompactList}\small\item\em Get the type object. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classBType_a38e533b9261c815ffe91e48a01d81c16}{add\+\_\+item}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classBType}{BType}} $>$ \&value)
+\begin{DoxyCompactList}\small\item\em Function for adding elements in \mbox{\hyperlink{classBList}{BList}}. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classBType_a46c070dcf3457e89067b0acdc8f5d218}{add\+\_\+item}} (const std\+::string \&key, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classBType}{BType}} $>$ \&value)
+\begin{DoxyCompactList}\small\item\em Function for adding elements in \mbox{\hyperlink{classBDict}{BDict}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Bencoding type interface. 
+
+Interface class for different types of bencoding 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classBType_a5bae287e59bf775bdb7e5ce726529a5b}\label{classBType_a5bae287e59bf775bdb7e5ce726529a5b}} 
+\index{BType@{BType}!````~BType@{$\sim$BType}}
+\index{````~BType@{$\sim$BType}!BType@{BType}}
+\doxysubsubsection{\texorpdfstring{$\sim$BType()}{~BType()}}
+{\footnotesize\ttfamily virtual BType\+::$\sim$\+BType (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Destroy the \mbox{\hyperlink{classBType}{BType}} object. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classBType_a46c070dcf3457e89067b0acdc8f5d218}\label{classBType_a46c070dcf3457e89067b0acdc8f5d218}} 
+\index{BType@{BType}!add\_item@{add\_item}}
+\index{add\_item@{add\_item}!BType@{BType}}
+\doxysubsubsection{\texorpdfstring{add\_item()}{add\_item()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual void BType\+::add\+\_\+item (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classBType}{BType}} $>$ \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Function for adding elements in \mbox{\hyperlink{classBDict}{BDict}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & \\
+\hline
+{\em value} & \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \mbox{\hyperlink{classBDict_af0567b082c937cc59120fae45b275d59}{BDict}}.
+
+\mbox{\Hypertarget{classBType_a38e533b9261c815ffe91e48a01d81c16}\label{classBType_a38e533b9261c815ffe91e48a01d81c16}} 
+\index{BType@{BType}!add\_item@{add\_item}}
+\index{add\_item@{add\_item}!BType@{BType}}
+\doxysubsubsection{\texorpdfstring{add\_item()}{add\_item()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily virtual void BType\+::add\+\_\+item (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classBType}{BType}} $>$ \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Function for adding elements in \mbox{\hyperlink{classBList}{BList}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \mbox{\hyperlink{classBList_a1fa5d7167a41e57c4cc5eefbea3c7bf5}{BList}}.
+
+\mbox{\Hypertarget{classBType_a0ee91da96a08a9367c0db765f256e30f}\label{classBType_a0ee91da96a08a9367c0db765f256e30f}} 
+\index{BType@{BType}!get\_type@{get\_type}}
+\index{get\_type@{get\_type}!BType@{BType}}
+\doxysubsubsection{\texorpdfstring{get\_type()}{get\_type()}}
+{\footnotesize\ttfamily virtual const std\+::string \& BType\+::get\+\_\+type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Get the type object. 
+
+\begin{DoxyReturn}{Returns}
+const std\+::string\& 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classBBytes_a13c1518ecedf4caa631c2e11332ca02d}{BBytes}}, \mbox{\hyperlink{classBDict_adde804b2decec529b59e238a061e31f1}{BDict}}, \mbox{\hyperlink{classBInteger_ab0a48408d614dd52fac7302251b53a08}{BInteger}}, \mbox{\hyperlink{classBList_a0b028f7443a0b40013ef7441803b5e5d}{BList}}, and \mbox{\hyperlink{classBString_a596f1ecf817751818f00c1dc33226fc7}{BString}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+b\+\_\+type.\+hpp\end{DoxyCompactItemize}

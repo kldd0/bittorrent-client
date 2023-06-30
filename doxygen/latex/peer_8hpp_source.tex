@@ -1,0 +1,76 @@
+\hypertarget{peer_8hpp_source}{}\doxysection{peer.\+hpp}
+\label{peer_8hpp_source}\index{peer.hpp@{peer.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ BITTORRENT\_CLIENT\_PEER\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ BITTORRENT\_CLIENT\_PEER\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <boost/asio.hpp>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <boost/asio/io\_service.hpp>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}torrent\_file.hpp"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }asio\ =\ boost::asio;}
+\DoxyCodeLine{00012\ \textcolor{keyword}{using\ }tcp\ =\ asio::ip::tcp;}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classPeer}{Peer}}\ \{}
+\DoxyCodeLine{00021\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00031\ \ \ \mbox{\hyperlink{classPeer_a4af0dc9fde3fe5906d0dbb9330030aec}{Peer}}(\textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id},\ \textcolor{keyword}{const}\ std::string\&\ peer\_id,\ tcp::endpoint\&\ ep,}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ asio::io\_service\&\ ios,\ std::shared\_ptr<TorrentFile>\ torrent\_file);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00040\ \ \ std::vector<unsigned\ char>\ handshake();}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00047\ \ \ \textcolor{keywordtype}{void}\ handle\_connect(\textcolor{keyword}{const}\ boost::system::error\_code\&\ err);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordtype}{void}\ handle\_write(\textcolor{keyword}{const}\ boost::system::error\_code\&\ err,}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::size\_t\ bytes\_transferred);}
+\DoxyCodeLine{00057\ \ \ }
+\DoxyCodeLine{00064\ \ \ \textcolor{keywordtype}{void}\ handle\_response(\textcolor{keyword}{const}\ boost::system::error\_code\&\ err,}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::size\_t\ bytes\_transferred);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00074\ \ \ \textcolor{keywordtype}{void}\ process\_bitfield(std::vector<unsigned\ char>::iterator\ s,}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<unsigned\ char>::iterator\ e);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00078\ \ \ \textcolor{keywordtype}{int}\ m\_id\{0\};\ \textcolor{comment}{//\ for\ statistics}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \textcolor{comment}{//\ base\ logging\ info}}
+\DoxyCodeLine{00081\ \ \ std::string\ m\_base\_log\ =\ \textcolor{stringliteral}{"{}Peer["{}}\ +\ m\_ip\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ std::to\_string(m\_port)\ +\ \textcolor{stringliteral}{"{}]"{}};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \textcolor{comment}{//\ message\ status}}
+\DoxyCodeLine{00084\ \ \ std::string\ m\_status\ =\ \textcolor{stringliteral}{"{}length"{}};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \textcolor{comment}{//\ tracker\ generated\ id}}
+\DoxyCodeLine{00087\ \ \ std::string\ m\_peer\_id\{\};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \textcolor{comment}{//\ network}}
+\DoxyCodeLine{00090\ \ \ std::string\ m\_ip;}
+\DoxyCodeLine{00091\ \ \ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ m\_port;}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ tcp::socket\ m\_socket;}
+\DoxyCodeLine{00094\ \ \ tcp::endpoint\ m\_endpoint;}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \textcolor{comment}{//\ buffer}}
+\DoxyCodeLine{00097\ \ \ std::vector<unsigned\ char>\ m\_response;}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \textcolor{comment}{//\ bitfield}}
+\DoxyCodeLine{00100\ \ \ std::vector<bool>\ m\_bitf\_pieces;}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \textcolor{comment}{//\ handshake\ status}}
+\DoxyCodeLine{00103\ \ \ \textcolor{keywordtype}{bool}\ m\_is\_got\_handshake\{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{00104\ \ \ \textcolor{keywordtype}{int}\ m\_handshake\_length\ =\ 68;}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \textcolor{keywordtype}{bool}\ m\_choked\{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \textcolor{comment}{//\ current\ downloading\ piece\ id}}
+\DoxyCodeLine{00109\ \ \ \textcolor{keywordtype}{int}\ m\_cur\_piece\_id\{-\/1\};}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ std::shared\_ptr<TorrentFile>\ m\_torrent\_file;}
+\DoxyCodeLine{00112\ \};}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

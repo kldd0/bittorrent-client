@@ -1,0 +1,77 @@
+\hypertarget{classBencodeObject}{}\doxysection{Bencode\+Object Class Reference}
+\label{classBencodeObject}\index{BencodeObject@{BencodeObject}}
+
+
+Class bencoded object.  
+
+
+
+
+{\ttfamily \#include $<$b\+\_\+object.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classBencodeObject_a0bf76032951a8ef5c9afb13775502a38}{Bencode\+Object}} (const std\+::vector$<$ unsigned char $>$ \&buffer)
+\begin{DoxyCompactList}\small\item\em Construct a new Bencode Object object. \end{DoxyCompactList}\item 
+const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classBDict}{BDict}} $>$ \mbox{\hyperlink{classBencodeObject_af758ece09220f2dbddd893f37468e414}{get\+\_\+dict}} ()
+\begin{DoxyCompactList}\small\item\em Get the dict object. \end{DoxyCompactList}\item 
+const std\+::vector$<$ unsigned char $>$ \& \mbox{\hyperlink{classBencodeObject_a3cf2d5366f7ab88b6da7077ca746305e}{get\+\_\+buffer}} () const
+\begin{DoxyCompactList}\small\item\em Get the buffer object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class bencoded object. 
+
+Class representing the entity of the bencoded object, it stores all parsed fields 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classBencodeObject_a0bf76032951a8ef5c9afb13775502a38}\label{classBencodeObject_a0bf76032951a8ef5c9afb13775502a38}} 
+\index{BencodeObject@{BencodeObject}!BencodeObject@{BencodeObject}}
+\index{BencodeObject@{BencodeObject}!BencodeObject@{BencodeObject}}
+\doxysubsubsection{\texorpdfstring{BencodeObject()}{BencodeObject()}}
+{\footnotesize\ttfamily Bencode\+Object\+::\+Bencode\+Object (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ unsigned char $>$ \&}]{buffer }\end{DoxyParamCaption})}
+
+
+
+Construct a new Bencode Object object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & Raw bytes of file stream \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classBencodeObject_a3cf2d5366f7ab88b6da7077ca746305e}\label{classBencodeObject_a3cf2d5366f7ab88b6da7077ca746305e}} 
+\index{BencodeObject@{BencodeObject}!get\_buffer@{get\_buffer}}
+\index{get\_buffer@{get\_buffer}!BencodeObject@{BencodeObject}}
+\doxysubsubsection{\texorpdfstring{get\_buffer()}{get\_buffer()}}
+{\footnotesize\ttfamily const std\+::vector$<$ unsigned char $>$ \& Bencode\+Object\+::get\+\_\+buffer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the buffer object. 
+
+\begin{DoxyReturn}{Returns}
+const std\+::vector$<$unsigned char$>$\& 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBencodeObject_af758ece09220f2dbddd893f37468e414}\label{classBencodeObject_af758ece09220f2dbddd893f37468e414}} 
+\index{BencodeObject@{BencodeObject}!get\_dict@{get\_dict}}
+\index{get\_dict@{get\_dict}!BencodeObject@{BencodeObject}}
+\doxysubsubsection{\texorpdfstring{get\_dict()}{get\_dict()}}
+{\footnotesize\ttfamily const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classBDict}{BDict}} $>$ Bencode\+Object\+::get\+\_\+dict (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the dict object. 
+
+\begin{DoxyReturn}{Returns}
+const std\+::shared\+\_\+ptr$<$const BDict$>$ 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+b\+\_\+object.\+hpp\end{DoxyCompactItemize}

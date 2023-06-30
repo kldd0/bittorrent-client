@@ -1,0 +1,153 @@
+\hypertarget{classBDict}{}\doxysection{BDict Class Reference}
+\label{classBDict}\index{BDict@{BDict}}
+
+
+Class dictionary.  
+
+
+
+
+{\ttfamily \#include $<$b\+\_\+dict.\+hpp$>$}
+
+Inheritance diagram for BDict\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classBDict}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classBDict_a82f7ed49609298068e7069f979738923}{BDict}} (int s\+\_\+pos, int e\+\_\+pos)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{classBDict}{BDict}} object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBDict_af0567b082c937cc59120fae45b275d59}{add\+\_\+item}} (const std\+::string \&key, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classBType}{BType}} $>$ \&value) override
+\begin{DoxyCompactList}\small\item\em Function for adding element in dict. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classBDict_adde804b2decec529b59e238a061e31f1}{get\+\_\+type}} () const override
+\begin{DoxyCompactList}\small\item\em Get the type object. \end{DoxyCompactList}\item 
+const std\+::map$<$ std\+::string, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classBType}{BType}} $>$ $>$ \& \mbox{\hyperlink{classBDict_a42c007d779ee3dc76e549147d6e2bd70}{get\+\_\+value}} () const
+\begin{DoxyCompactList}\small\item\em Get the value dict object. \end{DoxyCompactList}\item 
+const int \& \mbox{\hyperlink{classBDict_af4bf461aadf532093e9ef798feef476e}{get\+\_\+start\+\_\+pos}} () const
+\begin{DoxyCompactList}\small\item\em Get the start pos object in byte buffer. \end{DoxyCompactList}\item 
+const int \& \mbox{\hyperlink{classBDict_a5459f04e4502a4e6bb368cbdbb2a3e77}{get\+\_\+end\+\_\+pos}} () const
+\begin{DoxyCompactList}\small\item\em Get the end pos object in byte buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions inherited from \mbox{\hyperlink{classBType}{BType}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classBType_a5bae287e59bf775bdb7e5ce726529a5b}{$\sim$\+BType}} ()=default
+\begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{classBType}{BType}} object. \end{DoxyCompactList}\item 
+virtual const std\+::string \& \mbox{\hyperlink{classBType_a0ee91da96a08a9367c0db765f256e30f}{get\+\_\+type}} () const =0
+\begin{DoxyCompactList}\small\item\em Get the type object. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classBType_a38e533b9261c815ffe91e48a01d81c16}{add\+\_\+item}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classBType}{BType}} $>$ \&value)
+\begin{DoxyCompactList}\small\item\em Function for adding elements in \mbox{\hyperlink{classBList}{BList}}. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classBType_a46c070dcf3457e89067b0acdc8f5d218}{add\+\_\+item}} (const std\+::string \&key, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classBType}{BType}} $>$ \&value)
+\begin{DoxyCompactList}\small\item\em Function for adding elements in \mbox{\hyperlink{classBDict}{BDict}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class dictionary. 
+
+Class representing dictionary in bencoding 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classBDict_a82f7ed49609298068e7069f979738923}\label{classBDict_a82f7ed49609298068e7069f979738923}} 
+\index{BDict@{BDict}!BDict@{BDict}}
+\index{BDict@{BDict}!BDict@{BDict}}
+\doxysubsubsection{\texorpdfstring{BDict()}{BDict()}}
+{\footnotesize\ttfamily BDict\+::\+BDict (\begin{DoxyParamCaption}\item[{int}]{s\+\_\+pos,  }\item[{int}]{e\+\_\+pos }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{classBDict}{BDict}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s\+\_\+pos} & Index of opening symbol in encoded structure \\
+\hline
+{\em e\+\_\+pos} & Index of closing symbol in encoded structure \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classBDict_af0567b082c937cc59120fae45b275d59}\label{classBDict_af0567b082c937cc59120fae45b275d59}} 
+\index{BDict@{BDict}!add\_item@{add\_item}}
+\index{add\_item@{add\_item}!BDict@{BDict}}
+\doxysubsubsection{\texorpdfstring{add\_item()}{add\_item()}}
+{\footnotesize\ttfamily void BDict\+::add\+\_\+item (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classBType}{BType}} $>$ \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Function for adding element in dict. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & Key of value in dict \\
+\hline
+{\em value} & The object being added \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classBType_a46c070dcf3457e89067b0acdc8f5d218}{BType}}.
+
+\mbox{\Hypertarget{classBDict_a5459f04e4502a4e6bb368cbdbb2a3e77}\label{classBDict_a5459f04e4502a4e6bb368cbdbb2a3e77}} 
+\index{BDict@{BDict}!get\_end\_pos@{get\_end\_pos}}
+\index{get\_end\_pos@{get\_end\_pos}!BDict@{BDict}}
+\doxysubsubsection{\texorpdfstring{get\_end\_pos()}{get\_end\_pos()}}
+{\footnotesize\ttfamily const int \& BDict\+::get\+\_\+end\+\_\+pos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the end pos object in byte buffer. 
+
+\begin{DoxyReturn}{Returns}
+const int\& 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBDict_af4bf461aadf532093e9ef798feef476e}\label{classBDict_af4bf461aadf532093e9ef798feef476e}} 
+\index{BDict@{BDict}!get\_start\_pos@{get\_start\_pos}}
+\index{get\_start\_pos@{get\_start\_pos}!BDict@{BDict}}
+\doxysubsubsection{\texorpdfstring{get\_start\_pos()}{get\_start\_pos()}}
+{\footnotesize\ttfamily const int \& BDict\+::get\+\_\+start\+\_\+pos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the start pos object in byte buffer. 
+
+\begin{DoxyReturn}{Returns}
+const int\& 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBDict_adde804b2decec529b59e238a061e31f1}\label{classBDict_adde804b2decec529b59e238a061e31f1}} 
+\index{BDict@{BDict}!get\_type@{get\_type}}
+\index{get\_type@{get\_type}!BDict@{BDict}}
+\doxysubsubsection{\texorpdfstring{get\_type()}{get\_type()}}
+{\footnotesize\ttfamily const std\+::string \& BDict\+::get\+\_\+type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get the type object. 
+
+\begin{DoxyReturn}{Returns}
+const std\+::string\& 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classBType_a0ee91da96a08a9367c0db765f256e30f}{BType}}.
+
+\mbox{\Hypertarget{classBDict_a42c007d779ee3dc76e549147d6e2bd70}\label{classBDict_a42c007d779ee3dc76e549147d6e2bd70}} 
+\index{BDict@{BDict}!get\_value@{get\_value}}
+\index{get\_value@{get\_value}!BDict@{BDict}}
+\doxysubsubsection{\texorpdfstring{get\_value()}{get\_value()}}
+{\footnotesize\ttfamily const std\+::map$<$ std\+::string, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classBType}{BType}} $>$ $>$ \& BDict\+::get\+\_\+value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the value dict object. 
+
+\begin{DoxyReturn}{Returns}
+const std\+::map$<$std\+::string, std\+::shared\+\_\+ptr$<$\+BType$>$$>$\& 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+b\+\_\+dict.\+hpp\end{DoxyCompactItemize}

@@ -1,0 +1,43 @@
+\hypertarget{torrent__file_8hpp_source}{}\doxysection{torrent\+\_\+file.\+hpp}
+\label{torrent__file_8hpp_source}\index{torrent\_file.hpp@{torrent\_file.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ BITTORRENT\_CLIENT\_TORRENT\_FILE\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ BITTORRENT\_CLIENT\_TORRENT\_FILE\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <bencode/b\_types.hpp>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classTorrentFile}{TorrentFile}}\ \{}
+\DoxyCodeLine{00016\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \mbox{\hyperlink{classTorrentFile_aaadb24b6094f03a3c4bbf1595185215d}{TorrentFile}}(\textcolor{keyword}{const}\ std::string\&\ filename);}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00029\ \ \ std::string\ \mbox{\hyperlink{classTorrentFile_a81e81713bb0ac92bcc26d8b655007695}{get\_announce}}();}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00036\ \ \ std::vector<unsigned\ char>\ \mbox{\hyperlink{classTorrentFile_aab7a92388e8a80a4eaf77edf7d7782f9}{get\_info\_hash}}();}
+\DoxyCodeLine{00043\ \ \ std::vector<unsigned\ char>\ \mbox{\hyperlink{classTorrentFile_ac80c7281a75b28be4d4f9e424abb543b}{get\_piece\_hash}}(\textcolor{keywordtype}{int}\ i);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00050\ \ \ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classTorrentFile_a9a3005c0196e1f1967c8080eeabd7cd5}{get\_torrent\_size}}()\ \{\ \textcolor{keywordflow}{return}\ m\_torrent\_size;\ \}}
+\DoxyCodeLine{00056\ \ \ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classTorrentFile_ad7c9f35fc5aa36371df7e45d3bbeb66a}{get\_piece\_length}}()\ \{\ \textcolor{keywordflow}{return}\ m\_piece\_length;\ \}}
+\DoxyCodeLine{00062\ \ \ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classTorrentFile_ab8f1c5172b60d87312ad0f979e0cac77}{get\_pieces\_count}}()\ \{\ \textcolor{keywordflow}{return}\ m\_pieces\_count;\ \}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00068\ \ \ \textcolor{keywordtype}{void}\ create\_empty\_files();}
+\DoxyCodeLine{00072\ \ \ \textcolor{keywordtype}{void}\ process\_piece\_length\_and\_pieces\_count();}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00075\ \ \ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ m\_torrent\_size\{0\};\ \textcolor{comment}{//\ torrent\ size\ value}}
+\DoxyCodeLine{00076\ \ \ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ m\_piece\_length\{0\};\ \textcolor{comment}{//\ piece\ length\ value}}
+\DoxyCodeLine{00077\ \ \ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ m\_pieces\_count\{0\};\ \textcolor{comment}{//\ pieces\ count\ value}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ std::string\ m\_filename\{\};}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ std::shared\_ptr<BencodeObject>\ m\_data;\ \textcolor{comment}{//\ pointer\ to\ bencode\ object}}
+\DoxyCodeLine{00082\ \};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

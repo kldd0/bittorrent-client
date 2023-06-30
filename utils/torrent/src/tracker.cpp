@@ -1,4 +1,3 @@
-#include <future>
 #include <iostream>
 #include <memory>
 #include <random>
@@ -47,8 +46,8 @@ std::string url_encode(const std::vector<unsigned char>& value) {
   escaped.fill('0');
   escaped << std::hex;
 
-  for (auto i = value.begin(), n = value.end(); i != n; ++i) {
-    std::string::value_type c = (*i);
+  for (auto it = value.begin(), n = value.end(); it != n; ++it) {
+    std::string::value_type c = (*it);
 
     // Keep alphanumeric and other accepted characters intact
     if (isalnum(c) || c == '-' || c == '_' || c == '.' || c == '~') {
@@ -73,14 +72,13 @@ void Tracker::request_peers_data() {
   using tcp = asio::ip::tcp;
 
   std::string announce_url = m_torrent_file->get_announce();
-  // std::string announce_url = "http://tracker.openbittorrent.com:80/announce";
 
   urls::url_view uv(announce_url);
 
   urls::url u = uv;
 
   std::string host = u.host();
-  std::string port = (u.port() != "") ? u.port() : "443";
+  std::string port = (u.port() != "") ? u.port() : "80";
 
   auto data = m_torrent_file->get_info_hash();
   std::string url_encoded_hash_str = url_encode(data);
@@ -89,7 +87,7 @@ void Tracker::request_peers_data() {
 
   // setting query params
   u.params().append({"info_hash", url_encoded_hash_str});
-  u.params().append({"peer_id", generate_peer_id()});
+  u.params().append({"peer_id", m_peer_id});
   u.params().append({"port", "6969"});
   u.params().append({"uploaded", "0"});
   u.params().append({"downloaded", "0"});
@@ -112,8 +110,6 @@ void Tracker::request_peers_data() {
     tcp::resolver resolver(ioc);
     beast::tcp_stream stream(ioc);
 
-    // tcp::socket socket(ioc);
-
     // Look up the domain name
     auto const results = resolver.resolve(host, port);
 
@@ -130,7 +126,6 @@ void Tracker::request_peers_data() {
 
     // Send the HTTP request to the remote host
     http::write(stream, req);
-    // http::write(socket, req);
 
     // This buffer is used for reading and must be persisted
     beast::flat_buffer buffer;
@@ -164,30 +159,62 @@ void Tracker::request_peers_data() {
                      b_result_dict->get_value().find("interval")->second)
                      ->get_value();
 
-    auto peers_dict = std::dynamic_pointer_cast<BList>(
-                          b_result_dict->get_value().find("peers")->second)
-                          ->get_value();
+    // check if peers data have already unpacked
+    if (auto p = std::dynamic_pointer_cast<BList>(
+            b_result_dict->get_value().find("peers")->second)) {
 
-    // std::vector<std::pair<std::string, long long>> peers;
+      auto peers_list = std::dynamic_pointer_cast<BList>(
+                            b_result_dict->get_value().find("peers")->second)
+                            ->get_value();
 
-    // interating over peers dict
-    for (auto const& peer_dict : peers_dict) {
-      // getting peer ip
-      std::string peer_ip = std::dynamic_pointer_cast<BString>(
-                                std::dynamic_pointer_cast<BDict>(peer_dict)
-                                    ->get_value()
-                                    .find("ip")
-                                    ->second)
-                                ->get_value();
-      // getting peer port
-      long long peer_port = std::dynamic_pointer_cast<BInteger>(
-                                std::dynamic_pointer_cast<BDict>(peer_dict)
-                                    ->get_value()
-                                    .find("port")
-                                    ->second)
-                                ->get_value();
-      // adding to dict
-      m_peers.push_back(std::make_shared<Peer>(peer_ip, peer_port));
+      // interating over peers dict
+      for (auto const& peer_dict : peers_list) {
+        // getting peer ip
+        std::string peer_ip = std::dynamic_pointer_cast<BString>(
+                                  std::dynamic_pointer_cast<BDict>(peer_dict)
+                                      ->get_value()
+                                      .find("ip")
+                                      ->second)
+                                  ->get_value();
+        // getting peer port
+        long long peer_port = std::dynamic_pointer_cast<BInteger>(
+                                  std::dynamic_pointer_cast<BDict>(peer_dict)
+                                      ->get_value()
+                                      .find("port")
+                                      ->second)
+                                  ->get_value();
+        // adding to dict
+        m_peers_ep.emplace_back(
+            tcp::endpoint(asio::ip::address::from_string(peer_ip), peer_port));
+      }
+    } else {
+      auto peers_bytes = std::dynamic_pointer_cast<BBytes>(
+          b_result_dict->get_value().find("peers")->second);
+
+      // getting indexes of peers bytes section in all buffer
+      int start_pos = peers_bytes->get_start_pos();
+      int end_pos = peers_bytes->get_end_pos();
+
+      // creating new vector of bytes only with peers bytes
+      auto peer_bytes_buff = std::vector<unsigned char>(
+          b_result->get_buffer().begin() + start_pos,
+          b_result->get_buffer().begin() + end_pos + 1);
+
+      // parsing compressed format of peers
+      // 6 bytes for every ip address, 4b - ip in ipv4 format, 2b - port
+      for (auto it = peer_bytes_buff.begin(); it != peer_bytes_buff.end();
+           it += 6) {
+        std::string peer_ip = "";
+        for (auto c = it; c != it + 4; ++c) {
+          peer_ip += std::to_string(*c);
+          if (c != it + 3) {
+            peer_ip += ".";
+          }
+        }
+        long long peer_port = (*(it + 4)) * 256 + (*(it + 5));
+        m_peers_ep.emplace_back(
+            tcp::endpoint(asio::ip::address::from_string(peer_ip), peer_port));
+      }
     }
 
     // Gracefully close the socket
@@ -195,8 +222,6 @@ void Tracker::request_peers_data() {
     stream.socket().shutdown(tcp::socket::shutdown_both, ec);
 
     // not_connected happens sometimes
-    // so don't bother reporting it.
-    //
     if (ec && ec != beast::errc::not_connected) {
       throw beast::system_error{ec};
     }
@@ -206,28 +231,44 @@ void Tracker::request_peers_data() {
 }
 
 void Tracker::check_peers() {
-  for (const std::shared_ptr<Peer>& peer : m_peers) {
-    // results.push_back(std::async(std::launch::async, &Peer::download, peer).get());
-    peer->download();
+  std::cout << "Peers count: " << m_peers_ep.size() << "\n";
+
+  try {
+    boost::asio::io_service io_service;
+
+    std::vector<std::shared_ptr<Peer>> peers;
+    int p_count = 1;
+    for (auto& ep : m_peers_ep) {
+      peers.emplace_back(
+          std::make_shared<Peer>(p_count, m_peer_id, ep, io_service, m_torrent_file));
+      ++p_count;
+      /*
+      tcp::endpoint edp(asio::ip::address::from_string("69.53.20.159"), 60000);
+      peers.emplace_back(
+          std::make_shared<Peer>(
+          p_count, m_peer_id,
+          edp, io_service,
+          m_torrent_file));
+      break;
+      */
+    }
+    // start async operations
+    io_service.run();
+  } catch (std::exception& e) {
+    std::cerr << "Exception [check_peers]: " << e.what() << "\n";
   }
 }
 
-Tracker::Tracker(std::unique_ptr<TorrentFile> torrent)
-    : m_peer_id(generate_peer_id()), m_torrent_file(std::move(torrent)) {
+void Tracker::unpack_peer_bytes() {}
+
+Tracker::Tracker(std::shared_ptr<TorrentFile> torrent)
+    : m_peer_id(generate_peer_id()), m_torrent_file(torrent) {
 
   std::cout << "peer_id: " << m_peer_id << " byte size: " << sizeof(m_peer_id)
             << "\n";
   std::cout << "announce: " << m_torrent_file->get_announce() << "\n";
 
   request_peers_data();
-
-  // std::cout << "interval: " << m_interval << "\n";
-  // std::cout << "peers:"
-  //           << "\n";
-  // for (auto [ip, port] : m_peers) {
-  //   std::cout << ip << ":" << port << "\n";
-  // }
-  // std::cout << "\n";
 
   check_peers();
 }

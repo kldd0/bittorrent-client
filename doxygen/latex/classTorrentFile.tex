@@ -1,0 +1,142 @@
+\hypertarget{classTorrentFile}{}\doxysection{Torrent\+File Class Reference}
+\label{classTorrentFile}\index{TorrentFile@{TorrentFile}}
+
+
+Class torrent file.  
+
+
+
+
+{\ttfamily \#include $<$torrent\+\_\+file.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTorrentFile_aaadb24b6094f03a3c4bbf1595185215d}{Torrent\+File}} (const std\+::string \&filename)
+\begin{DoxyCompactList}\small\item\em Construct a new Torrent File object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classTorrentFile_a81e81713bb0ac92bcc26d8b655007695}{get\+\_\+announce}} ()
+\begin{DoxyCompactList}\small\item\em Get the announce url. \end{DoxyCompactList}\item 
+std\+::vector$<$ unsigned char $>$ \mbox{\hyperlink{classTorrentFile_aab7a92388e8a80a4eaf77edf7d7782f9}{get\+\_\+info\+\_\+hash}} ()
+\begin{DoxyCompactList}\small\item\em Get the sha1 hash bytes of info dictionary. \end{DoxyCompactList}\item 
+std\+::vector$<$ unsigned char $>$ \mbox{\hyperlink{classTorrentFile_ac80c7281a75b28be4d4f9e424abb543b}{get\+\_\+piece\+\_\+hash}} (int i)
+\begin{DoxyCompactList}\small\item\em Get sha1 hash bytes of piece. \end{DoxyCompactList}\item 
+long long \mbox{\hyperlink{classTorrentFile_a9a3005c0196e1f1967c8080eeabd7cd5}{get\+\_\+torrent\+\_\+size}} ()
+\begin{DoxyCompactList}\small\item\em Get the torrent size value. \end{DoxyCompactList}\item 
+long long \mbox{\hyperlink{classTorrentFile_ad7c9f35fc5aa36371df7e45d3bbeb66a}{get\+\_\+piece\+\_\+length}} ()
+\begin{DoxyCompactList}\small\item\em Get the piece length. \end{DoxyCompactList}\item 
+long long \mbox{\hyperlink{classTorrentFile_ab8f1c5172b60d87312ad0f979e0cac77}{get\+\_\+pieces\+\_\+count}} ()
+\begin{DoxyCompactList}\small\item\em Get the pieces count value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class torrent file. 
+
+Class representing the entity of torrent file 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classTorrentFile_aaadb24b6094f03a3c4bbf1595185215d}\label{classTorrentFile_aaadb24b6094f03a3c4bbf1595185215d}} 
+\index{TorrentFile@{TorrentFile}!TorrentFile@{TorrentFile}}
+\index{TorrentFile@{TorrentFile}!TorrentFile@{TorrentFile}}
+\doxysubsubsection{\texorpdfstring{TorrentFile()}{TorrentFile()}}
+{\footnotesize\ttfamily Torrent\+File\+::\+Torrent\+File (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename }\end{DoxyParamCaption})}
+
+
+
+Construct a new Torrent File object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Relative file path \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classTorrentFile_a81e81713bb0ac92bcc26d8b655007695}\label{classTorrentFile_a81e81713bb0ac92bcc26d8b655007695}} 
+\index{TorrentFile@{TorrentFile}!get\_announce@{get\_announce}}
+\index{get\_announce@{get\_announce}!TorrentFile@{TorrentFile}}
+\doxysubsubsection{\texorpdfstring{get\_announce()}{get\_announce()}}
+{\footnotesize\ttfamily std\+::string Torrent\+File\+::get\+\_\+announce (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the announce url. 
+
+\begin{DoxyReturn}{Returns}
+std\+::string 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classTorrentFile_aab7a92388e8a80a4eaf77edf7d7782f9}\label{classTorrentFile_aab7a92388e8a80a4eaf77edf7d7782f9}} 
+\index{TorrentFile@{TorrentFile}!get\_info\_hash@{get\_info\_hash}}
+\index{get\_info\_hash@{get\_info\_hash}!TorrentFile@{TorrentFile}}
+\doxysubsubsection{\texorpdfstring{get\_info\_hash()}{get\_info\_hash()}}
+{\footnotesize\ttfamily std\+::vector$<$ unsigned char $>$ Torrent\+File\+::get\+\_\+info\+\_\+hash (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the sha1 hash bytes of info dictionary. 
+
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$unsigned char$>$ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classTorrentFile_ac80c7281a75b28be4d4f9e424abb543b}\label{classTorrentFile_ac80c7281a75b28be4d4f9e424abb543b}} 
+\index{TorrentFile@{TorrentFile}!get\_piece\_hash@{get\_piece\_hash}}
+\index{get\_piece\_hash@{get\_piece\_hash}!TorrentFile@{TorrentFile}}
+\doxysubsubsection{\texorpdfstring{get\_piece\_hash()}{get\_piece\_hash()}}
+{\footnotesize\ttfamily std\+::vector$<$ unsigned char $>$ Torrent\+File\+::get\+\_\+piece\+\_\+hash (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})}
+
+
+
+Get sha1 hash bytes of piece. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Index of piece \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$unsigned char$>$ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classTorrentFile_ad7c9f35fc5aa36371df7e45d3bbeb66a}\label{classTorrentFile_ad7c9f35fc5aa36371df7e45d3bbeb66a}} 
+\index{TorrentFile@{TorrentFile}!get\_piece\_length@{get\_piece\_length}}
+\index{get\_piece\_length@{get\_piece\_length}!TorrentFile@{TorrentFile}}
+\doxysubsubsection{\texorpdfstring{get\_piece\_length()}{get\_piece\_length()}}
+{\footnotesize\ttfamily long long Torrent\+File\+::get\+\_\+piece\+\_\+length (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the piece length. 
+
+\begin{DoxyReturn}{Returns}
+long long 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classTorrentFile_ab8f1c5172b60d87312ad0f979e0cac77}\label{classTorrentFile_ab8f1c5172b60d87312ad0f979e0cac77}} 
+\index{TorrentFile@{TorrentFile}!get\_pieces\_count@{get\_pieces\_count}}
+\index{get\_pieces\_count@{get\_pieces\_count}!TorrentFile@{TorrentFile}}
+\doxysubsubsection{\texorpdfstring{get\_pieces\_count()}{get\_pieces\_count()}}
+{\footnotesize\ttfamily long long Torrent\+File\+::get\+\_\+pieces\+\_\+count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the pieces count value. 
+
+\begin{DoxyReturn}{Returns}
+long long 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classTorrentFile_a9a3005c0196e1f1967c8080eeabd7cd5}\label{classTorrentFile_a9a3005c0196e1f1967c8080eeabd7cd5}} 
+\index{TorrentFile@{TorrentFile}!get\_torrent\_size@{get\_torrent\_size}}
+\index{get\_torrent\_size@{get\_torrent\_size}!TorrentFile@{TorrentFile}}
+\doxysubsubsection{\texorpdfstring{get\_torrent\_size()}{get\_torrent\_size()}}
+{\footnotesize\ttfamily long long Torrent\+File\+::get\+\_\+torrent\+\_\+size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the torrent size value. 
+
+\begin{DoxyReturn}{Returns}
+long long 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+torrent\+\_\+file.\+hpp\end{DoxyCompactItemize}

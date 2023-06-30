@@ -1,0 +1,32 @@
+\hypertarget{b__bytes_8hpp_source}{}\doxysection{b\+\_\+bytes.\+hpp}
+\label{b__bytes_8hpp_source}\index{b\_bytes.hpp@{b\_bytes.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ BITTORRENT\_CLIENT\_BBYTES\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ BITTORRENT\_CLIENT\_BBYTES\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}b\_type.hpp"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classBBytes}{BBytes}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classBType}{BType}}\ \{}
+\DoxyCodeLine{00017\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classBBytes_a295b472a65f532d98086e85f360a8ded}{BBytes}}(std::pair<int,\ int>\ pair\_of\_indexes);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00030\ \ \ [[nodiscard]]\ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classBBytes_a13c1518ecedf4caa631c2e11332ca02d}{get\_type}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ m\_type;\ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00037\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\&\ \mbox{\hyperlink{classBBytes_a2f94c534b0e5c207c6687c08bbd96942}{get\_start\_pos}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_start\_pos;\ \}}
+\DoxyCodeLine{00043\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\&\ \mbox{\hyperlink{classBBytes_a01a514693ddbbcf9b950bae945d258e3}{get\_end\_pos}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_end\_pos;\ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00046\ \ \ \textcolor{keywordtype}{int}\ m\_start\_pos\{0\};}
+\DoxyCodeLine{00047\ \ \ \textcolor{keywordtype}{int}\ m\_end\_pos\{0\};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ std::string\ m\_type\{\textcolor{stringliteral}{"{}bytes"{}}\};\ \textcolor{comment}{//\ typename\ value\ used\ for\ upcast}}
+\DoxyCodeLine{00050\ \};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

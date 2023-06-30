@@ -1,0 +1,27 @@
+\hypertarget{b__string_8hpp_source}{}\doxysection{b\+\_\+string.\+hpp}
+\label{b__string_8hpp_source}\index{b\_string.hpp@{b\_string.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ BITTORRENT\_CLIENT\_B\_STRING\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ BITTORRENT\_CLIENT\_B\_STRING\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}b\_type.hpp"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classBString}{BString}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classBType}{BType}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classBString_a1f2aa255bcd3b1e5f00ae35593d27751}{BString}}(std::string\ str);}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00028\ \ \ [[nodiscard]]\ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classBString_a596f1ecf817751818f00c1dc33226fc7}{get\_type}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ m\_type;\ \}}
+\DoxyCodeLine{00034\ \ \ [[nodiscard]]\ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classBString_a4891064fd9678d69d7df25f7fa227135}{get\_value}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_value;\ \}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00037\ \ \ std::string\ m\_type\ \{\textcolor{stringliteral}{"{}string"{}}\};\ \textcolor{comment}{//\ typename\ value\ used\ for\ upcast}}
+\DoxyCodeLine{00038\ \ \ std::string\ m\_value\ \{\};\ \ \ \ \ \ \ \ \textcolor{comment}{//\ object\ value}}
+\DoxyCodeLine{00039\ \};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

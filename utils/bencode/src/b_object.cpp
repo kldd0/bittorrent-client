@@ -100,13 +100,13 @@ int BencodeObject::get_index_of_closing_pair(std::pair<int, unsigned char> p) {
 }
 
 void BencodeObject::parse(std::shared_ptr<BType>& b_object,
-                        const std::vector<unsigned char>& buffer, int& index,
-                        int& end) {
+                          const std::vector<unsigned char>& buffer, int& index,
+                          int& end) {
   if (b_object->get_type() == "dict") {
     while (index != end) {
       std::string key = parse_string(buffer, index);
       if (std::isdigit(buffer[index])) {
-        if (key == "pieces") {
+        if ((key == "pieces") || (key == "peers")) {
           std::cout << "parsing pieces..."
                     << "\n";
           std::shared_ptr<BType> value =
@@ -132,11 +132,6 @@ void BencodeObject::parse(std::shared_ptr<BType>& b_object,
         // getting index of ending symbol for this dictionary
         int end_index =
             get_index_of_closing_pair(std::make_pair(index, buffer[index]));
-
-        std::cout << "found end index for dict: " << key
-                  << " start index: " << index << " elem: " << buffer[index]
-                  << " end_index: " << end_index
-                  << " elem: " << buffer[end_index] << "\n";
 
         std::shared_ptr<BType> value =
             std::make_shared<BDict>(index, end_index);
@@ -220,14 +215,12 @@ void BencodeObject::parse(std::shared_ptr<BType>& b_object,
   }
 }
 
-
 void print_dict(const std::shared_ptr<BDict>& t_dict, int nested_index);
 
 void print_list(const std::shared_ptr<BList>& t_list, int nested_index);
 
-
 BencodeObject::BencodeObject(const std::vector<unsigned char>& buffer)
-  : m_buffer(buffer) {
+    : m_buffer(buffer) {
   // clear an ending new line character
   if (*(m_buffer.end() - 1) == ' ') {
     m_buffer.erase(m_buffer.end() - 1);
@@ -243,14 +236,6 @@ BencodeObject::BencodeObject(const std::vector<unsigned char>& buffer)
   // destructuring in pairs of starting and ending symbols
   m_pairs = parse_stream(m_buffer);
 
-  // std::cout << "---- pairs ----"
-  //           << "\n";
-  // for (auto e : m_pairs) {
-  //   std::cout << "start: " << e.first << " elem: " << e.second << "\n";
-  // }
-  // std::cout << "---------------"
-  //           << "\n";
-
   // +1 because main dictionary is already created
   // excluding starting symbols of container ex. 'd'
   ++start;
@@ -263,8 +248,7 @@ BencodeObject::BencodeObject(const std::vector<unsigned char>& buffer)
   print_dict(m_dict, 0);
 };
 
-
-/*
+/**
  * @brief [debug helper funcs] functions for pretty print
  */
 std::string make_tabs(int n) {
@@ -304,25 +288,21 @@ void print_dict(const std::shared_ptr<BDict>& t_dict, int nested_index) {
             << "\n";
   for (auto const& [k, v] : t_dict->get_value()) {
     std::cout << s << k << ": ";
-    if (k == "pieces") {
+    if (v->get_type() == "string") {
+      std::cout << s << std::dynamic_pointer_cast<BString>(v)->get_value()
+                << "\n";
+    } else if (v->get_type() == "int") {
+      std::cout << s << std::dynamic_pointer_cast<BInteger>(v)->get_value()
+                << "\n";
+    } else if (v->get_type() == "list") {
+      print_list(std::dynamic_pointer_cast<BList>(v), nested_index + 1);
+    } else if (v->get_type() == "dict") {
+      print_dict(std::dynamic_pointer_cast<BDict>(v), nested_index + 1);
+    } else {
       std::cout << "OMITTED"
                 << "\n";
       std::cout << s << "}" << nested_index << "\n";
       return;
-    }
-    if (v->get_type() == "string") {
-      std::cout << s << std::dynamic_pointer_cast<BString>(v)->get_value()
-                << "\n";
-    }
-    if (v->get_type() == "int") {
-      std::cout << s << std::dynamic_pointer_cast<BInteger>(v)->get_value()
-                << "\n";
-    }
-    if (v->get_type() == "list") {
-      print_list(std::dynamic_pointer_cast<BList>(v), nested_index + 1);
-    }
-    if (v->get_type() == "dict") {
-      print_dict(std::dynamic_pointer_cast<BDict>(v), nested_index + 1);
     }
   }
   std::cout << make_tabs(nested_index - 1) << "}" << nested_index << "\n";

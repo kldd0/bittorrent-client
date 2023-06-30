@@ -9,19 +9,38 @@
 #include <vector>
 
 /**
+ * @brief Bencoding type interface
+ *
  * Interface class for different types of bencoding
  */
 class BType
 {
 public:
+  /**
+   * @brief Destroy the BType object
+   * 
+   */
   virtual ~BType() = default;
 
+  /**
+   * @brief Get the type object
+   * 
+   * @return const std::string& 
+   */
   [[nodiscard]] virtual const std::string& get_type() const = 0;
-  // [[nodiscard]] virtual const std::shared_ptr<const BType> get_value() const;
 
-  // function for adding elements in BList
+  /**
+   * @brief Function for adding elements in BList
+   * 
+   * @param value 
+   */
   virtual void add_item(std::shared_ptr<BType>& value) {};
-  // function for adding elements in BDict
+  /**
+   * @brief Function for adding elements in BDict
+   * 
+   * @param key
+   * @param value 
+   */
   virtual void add_item(const std::string& key, std::shared_ptr<BType>& value) {};
 };
 

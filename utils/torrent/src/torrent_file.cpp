@@ -28,6 +28,7 @@ TorrentFile::TorrentFile(const std::string& filename) : m_filename(filename) {
   m_data = std::make_shared<BencodeObject>(buffer);
 
   create_empty_files();
+  process_piece_length_and_pieces_count();
 }
 
 std::vector<unsigned char> TorrentFile::get_info_hash() {
@@ -60,7 +61,7 @@ std::vector<unsigned char> TorrentFile::get_info_hash() {
   }
 
   std::string hash_str = oss.str();
-  std::cout << "hash_string: " << hash_str << "\n";
+  // std::cout << "hash_string: " << hash_str << "\n";
 
   std::vector<unsigned char> bytes;
   boost::algorithm::unhex(hash_str, std::back_inserter(bytes));
@@ -168,4 +169,48 @@ std::string TorrentFile::get_announce() {
   return std::dynamic_pointer_cast<BString>(
              m_data->get_dict()->get_value().find("announce")->second)
       ->get_value();
+}
+
+void TorrentFile::process_piece_length_and_pieces_count() {
+  // dict of b_object
+  auto dict = m_data->get_dict();
+  // getting info dict object
+  std::map<std::string, std::shared_ptr<BType>> info_dict =
+      std::dynamic_pointer_cast<BDict>(dict->get_value().find("info")->second)
+          ->get_value();
+  // setting piece_length
+  m_piece_length = std::dynamic_pointer_cast<BInteger>(
+                       info_dict.find("piece length")->second)
+                       ->get_value();
+
+  auto pieces =
+      std::dynamic_pointer_cast<BBytes>(info_dict.find("pieces")->second);
+
+  int start = pieces->get_start_pos();
+  int end = pieces->get_end_pos();
+
+  // end pos is included => +1
+  // pieces_count = length of pieces / 20
+  // sha1 hash of every piece has length of 20 bytes
+  m_pieces_count = (end - start + 1) / 20;
+}
+
+std::vector<unsigned char> TorrentFile::get_piece_hash(int i) {
+  // dict of b_object
+  auto dict = m_data->get_dict();
+  // getting info dict object
+  std::map<std::string, std::shared_ptr<BType>> info_dict =
+      std::dynamic_pointer_cast<BDict>(dict->get_value().find("info")->second)
+          ->get_value();
+
+  auto pieces =
+      std::dynamic_pointer_cast<BBytes>(info_dict.find("pieces")->second);
+
+  int start = pieces->get_start_pos();
+
+  auto buffer = m_data->get_buffer();
+
+  auto start_copy = buffer.begin() + start + (i * 20);
+  return std::vector<unsigned char>(start_copy,
+                                    start_copy + 20); // hash length - 20 bytes
 }

@@ -18,8 +18,8 @@ int main(int argc, char **argv) {
 
   std::ifstream input(filename, std::ios::binary);
 
-  auto torrent = std::make_unique<TorrentFile>(filename);
-  auto tracker = Tracker(std::move(torrent));
+  auto torrent = std::make_shared<TorrentFile>(filename);
+  auto tracker = Tracker(torrent);
 
   return 0;
 }

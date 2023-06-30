@@ -1,0 +1,37 @@
+\hypertarget{b__list_8hpp_source}{}\doxysection{b\+\_\+list.\+hpp}
+\label{b__list_8hpp_source}\index{b\_list.hpp@{b\_list.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ BITTORRENT\_CLIENT\_BLIST\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ BITTORRENT\_CLIENT\_BLIST\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}b\_type.hpp"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classBList}{BList}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classBType}{BType}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{classBList_a64e4a20c028a3932507820e32911e507}{BList}}(\textcolor{keywordtype}{int}\ s\_pos,\ \textcolor{keywordtype}{int}\ e\_pos);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00031\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBList_a1fa5d7167a41e57c4cc5eefbea3c7bf5}{add\_item}}(std::shared\_ptr<BType>\&\ value)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00038\ \ \ [[nodiscard]]\ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classBList_a0b028f7443a0b40013ef7441803b5e5d}{get\_type}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ m\_type;\ \}}
+\DoxyCodeLine{00044\ \ \ [[nodiscard]]\ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<BType>>\&\ \mbox{\hyperlink{classBList_a1aed01cb19e88a5f53166127739bf335}{get\_value}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_vec;\ \}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00051\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\&\ \mbox{\hyperlink{classBList_a3ee8930a5bce9250d2e4d1ec7d45ea1d}{get\_start\_pos}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_start\_pos;\ \}}
+\DoxyCodeLine{00057\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\&\ \mbox{\hyperlink{classBList_aafec85cbd8567654c369e51fec6563ff}{get\_end\_pos}}()\textcolor{keyword}{\ \ \ const\ }\{\ \textcolor{keywordflow}{return}\ m\_end\_pos;\ \}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00060\ \ \ \textcolor{keywordtype}{int}\ m\_start\_pos\ \{0\};}
+\DoxyCodeLine{00061\ \ \ \textcolor{keywordtype}{int}\ m\_end\_pos\ \{0\};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ std::string\ m\_type\ \{\textcolor{stringliteral}{"{}list"{}}\};\ \textcolor{comment}{//\ typename\ value}}
+\DoxyCodeLine{00064\ \ \ std::vector<std::shared\_ptr<BType>>\ m\_vec;\ \textcolor{comment}{//\ list\ value\ of\ objects}}
+\DoxyCodeLine{00065\ \};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

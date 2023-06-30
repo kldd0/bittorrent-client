@@ -1,0 +1,113 @@
+\hypertarget{classBBytes}{}\doxysection{BBytes Class Reference}
+\label{classBBytes}\index{BBytes@{BBytes}}
+
+
+Class bytes.  
+
+
+
+
+{\ttfamily \#include $<$b\+\_\+bytes.\+hpp$>$}
+
+Inheritance diagram for BBytes\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classBBytes}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classBBytes_a295b472a65f532d98086e85f360a8ded}{BBytes}} (std\+::pair$<$ int, int $>$ pair\+\_\+of\+\_\+indexes)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{classBBytes}{BBytes}} object. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classBBytes_a13c1518ecedf4caa631c2e11332ca02d}{get\+\_\+type}} () const override
+\begin{DoxyCompactList}\small\item\em Get the type object. \end{DoxyCompactList}\item 
+const int \& \mbox{\hyperlink{classBBytes_a2f94c534b0e5c207c6687c08bbd96942}{get\+\_\+start\+\_\+pos}} () const
+\begin{DoxyCompactList}\small\item\em Get the start pos object. \end{DoxyCompactList}\item 
+const int \& \mbox{\hyperlink{classBBytes_a01a514693ddbbcf9b950bae945d258e3}{get\+\_\+end\+\_\+pos}} () const
+\begin{DoxyCompactList}\small\item\em Get the end pos object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions inherited from \mbox{\hyperlink{classBType}{BType}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classBType_a5bae287e59bf775bdb7e5ce726529a5b}{$\sim$\+BType}} ()=default
+\begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{classBType}{BType}} object. \end{DoxyCompactList}\item 
+virtual const std\+::string \& \mbox{\hyperlink{classBType_a0ee91da96a08a9367c0db765f256e30f}{get\+\_\+type}} () const =0
+\begin{DoxyCompactList}\small\item\em Get the type object. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classBType_a38e533b9261c815ffe91e48a01d81c16}{add\+\_\+item}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classBType}{BType}} $>$ \&value)
+\begin{DoxyCompactList}\small\item\em Function for adding elements in \mbox{\hyperlink{classBList}{BList}}. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classBType_a46c070dcf3457e89067b0acdc8f5d218}{add\+\_\+item}} (const std\+::string \&key, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classBType}{BType}} $>$ \&value)
+\begin{DoxyCompactList}\small\item\em Function for adding elements in \mbox{\hyperlink{classBDict}{BDict}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class bytes. 
+
+Class representing raw bytes (stored in pieces key) in bencoding instance of this type just store indexes of raw byte sequence 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classBBytes_a295b472a65f532d98086e85f360a8ded}\label{classBBytes_a295b472a65f532d98086e85f360a8ded}} 
+\index{BBytes@{BBytes}!BBytes@{BBytes}}
+\index{BBytes@{BBytes}!BBytes@{BBytes}}
+\doxysubsubsection{\texorpdfstring{BBytes()}{BBytes()}}
+{\footnotesize\ttfamily BBytes\+::\+BBytes (\begin{DoxyParamCaption}\item[{std\+::pair$<$ int, int $>$}]{pair\+\_\+of\+\_\+indexes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Construct a new \mbox{\hyperlink{classBBytes}{BBytes}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pair\+\_\+of\+\_\+indexes} & Indexes of starting and ending position in raw byte buffer \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classBBytes_a01a514693ddbbcf9b950bae945d258e3}\label{classBBytes_a01a514693ddbbcf9b950bae945d258e3}} 
+\index{BBytes@{BBytes}!get\_end\_pos@{get\_end\_pos}}
+\index{get\_end\_pos@{get\_end\_pos}!BBytes@{BBytes}}
+\doxysubsubsection{\texorpdfstring{get\_end\_pos()}{get\_end\_pos()}}
+{\footnotesize\ttfamily const int \& BBytes\+::get\+\_\+end\+\_\+pos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the end pos object. 
+
+\begin{DoxyReturn}{Returns}
+const int\& Ending index in buffer 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBBytes_a2f94c534b0e5c207c6687c08bbd96942}\label{classBBytes_a2f94c534b0e5c207c6687c08bbd96942}} 
+\index{BBytes@{BBytes}!get\_start\_pos@{get\_start\_pos}}
+\index{get\_start\_pos@{get\_start\_pos}!BBytes@{BBytes}}
+\doxysubsubsection{\texorpdfstring{get\_start\_pos()}{get\_start\_pos()}}
+{\footnotesize\ttfamily const int \& BBytes\+::get\+\_\+start\+\_\+pos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the start pos object. 
+
+\begin{DoxyReturn}{Returns}
+const int\& Starting index in buffer 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBBytes_a13c1518ecedf4caa631c2e11332ca02d}\label{classBBytes_a13c1518ecedf4caa631c2e11332ca02d}} 
+\index{BBytes@{BBytes}!get\_type@{get\_type}}
+\index{get\_type@{get\_type}!BBytes@{BBytes}}
+\doxysubsubsection{\texorpdfstring{get\_type()}{get\_type()}}
+{\footnotesize\ttfamily const std\+::string \& BBytes\+::get\+\_\+type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get the type object. 
+
+\begin{DoxyReturn}{Returns}
+const std\+::string\& 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classBType_a0ee91da96a08a9367c0db765f256e30f}{BType}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+b\+\_\+bytes.\+hpp\end{DoxyCompactItemize}
