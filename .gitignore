@@ -12,3 +12,4 @@ temp.cxx
 .clangd
 download
 Doxyfile.bak
+doxygen/
