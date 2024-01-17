@@ -3,7 +3,7 @@ cmake-build-debug
 .vscode
 build
 bin
-docs
+./docs/*
 bin.dbg
 .clang-format
 .clangd
@@ -13,3 +13,5 @@ temp.cxx
 download
 Doxyfile.bak
 doxygen/
+*.a
+torrents/
